@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sessions - ToppTrener
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Available Training Sessions</h1>
+
+{% if sessions %}
+    <div class="row">
+        {% for session in sessions %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ session.title }}</h5>
+                        <p class="card-text">{{ session.description }}</p>
+
+                        <ul class="list-unstyled">
+                            <li><strong>Trainer:</strong> {{ session.trainer.user.username }}</li>
+                            <li><strong>Sport:</strong> {{ session.sport_type.name }}</li>
+                            <li><strong>Location:</strong> {{ session.location.name }}</li>
+                            <li><strong>Start:</strong> {{ session.start_datetime }}</li>
+                            <li><strong>Level:</strong> {{ session.get_level_display }}</li>
+                            <li><strong>Price:</strong> {{ session.price_per_person }}</li>
+                            <li><strong>Status:</strong> {{ session.get_status_display }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No sessions are available right now.</p>
+{% endif %}
+{% endblock %}
