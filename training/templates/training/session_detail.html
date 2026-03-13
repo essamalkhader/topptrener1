@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ session.title }} - ToppTrener
+{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="card-title mb-3">{{ session.title }}</h1>
+
+        <p class="card-text">{{ session.description }}</p>
+
+        <ul class="list-unstyled">
+            <li><strong>Trainer:</strong> {{ session.trainer.user.username }}</li>
+            <li><strong>Sport:</strong> {{ session.sport_type.name }}</li>
+            <li><strong>Location:</strong> {{ session.location.name }}</li>
+            <li><strong>Address:</strong> {{ session.location.address }}</li>
+            <li><strong>City:</strong> {{ session.location.city }}</li>
+            <li><strong>Start:</strong> {{ session.start_datetime }}</li>
+            <li><strong>Duration:</strong> {{ session.duration_minutes }} minutes</li>
+            <li><strong>Level:</strong> {{ session.get_level_display }}</li>
+            <li><strong>Capacity:</strong> {{ session.capacity }}</li>
+            <li><strong>Price:</strong> {{ session.price_per_person }}</li>
+            <li><strong>Group session:</strong> {{ session.is_group|yesno:"Yes,No" }}</li>
+            <li><strong>Status:</strong> {{ session.get_status_display }}</li>
+        </ul>
+
+        <a href="/sessions/" class="btn btn-secondary">Back to Sessions</a>
+        <a href="#" class="btn btn-primary">Book Session</a>
+    </div>
+</div>
+{% endblock %}
