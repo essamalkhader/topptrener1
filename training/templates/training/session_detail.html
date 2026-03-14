@@ -26,8 +26,17 @@
             <li><strong>Status:</strong> {{ session.get_status_display }}</li>
         </ul>
 
+        <hr>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'create_booking' session.id %}" class="btn btn-success">Book Session</a>
+        {% else %}
+            <p>
+                <a href="{% url 'login' %}">Login</a> to book this session.
+            </p>
+        {% endif %}
+
         <a href="/sessions/" class="btn btn-secondary">Back to Sessions</a>
-        <a href="#" class="btn btn-primary">Book Session</a>
     </div>
 </div>
 {% endblock %}

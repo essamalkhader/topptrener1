@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Book Session - ToppTrener
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="mb-3">Book Session</h1>
+
+                <p><strong>Session:</strong> {{ session.title }}</p>
+                <p><strong>Trainer:</strong> {{ session.trainer.user.username }}</p>
+                <p><strong>Location:</strong> {{ session.location.name }}</p>
+                <p><strong>Start:</strong> {{ session.start_datetime }}</p>
+                <p><strong>Price:</strong> {{ session.price_per_person }}</p>
+
+                <hr>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-success">Confirm Booking</button>
+                    <a href="/sessions/{{ session.id }}/" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

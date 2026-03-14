@@ -14,3 +14,4 @@ def session_list(request):
 def session_detail(request, session_id):
     session = get_object_or_404(Session, id=session_id)
     return render(request, "training/session_detail.html", {"session": session})
+
