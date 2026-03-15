@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Bookings - ToppTrener
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Bookings</h1>
+
+{% if bookings %}
+    <div class="row">
+        {% for booking in bookings %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ booking.session.title }}</h5>
+
+                        <ul class="list-unstyled">
+                            <li><strong>Trainer:</strong> {{ booking.session.trainer.user.username }}</li>
+                            <li><strong>Sport:</strong> {{ booking.session.sport_type.name }}</li>
+                            <li><strong>Location:</strong> {{ booking.session.location.name }}</li>
+                            <li><strong>Start:</strong> {{ booking.session.start_datetime }}</li>
+                            <li><strong>Seats:</strong> {{ booking.seats }}</li>
+                            <li><strong>Status:</strong> {{ booking.get_status_display }}</li>
+                            <li><strong>Booked on:</strong> {{ booking.created_at }}</li>
+                        </ul>
+
+                        <a href="/sessions/{{ booking.session.id }}/" class="btn btn-outline-primary btn-sm">
+                            View Session
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>You have no bookings yet.</p>
+{% endif %}
+{% endblock %}

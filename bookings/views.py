@@ -32,3 +32,8 @@ def create_booking(request, session_id):
         "form": form,
         "session": session,
     })
+
+@login_required
+def my_bookings(request):
+    bookings = Booking.objects.filter(user=request.user).select_related("session", "session__trainer", "session__sport_type", "session__location").order_by("-created_at")
+    return render(request, "bookings/my_bookings.html", {"bookings": bookings})
