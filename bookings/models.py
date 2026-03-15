@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q
 from training.models import Session
 
 
@@ -21,7 +22,12 @@ class Booking(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ("user", "session")
+        constraints = [
+             models.UniqueConstraint(
+                 fields=["user", "session"],
+                 condition=~Q(status="cancelled"),
+                 name="unique_active_booking_per_user_session",)
+                 ]
 
     def __str__(self):
         return f"{self.user.username} - {self.session.title}"

@@ -11,9 +11,11 @@ from .models import Booking
 def create_booking(request, session_id):
     session = get_object_or_404(Session, id=session_id)
 
-    existing_booking = Booking.objects.filter(user=request.user, session=session).first()
+    existing_booking = Booking.objects.filter(
+        user=request.user,
+        session=session).exclude(status="cancelled").first()
     if existing_booking:
-        messages.warning(request, "You have already booked this session.")
+        messages.warning(request, "You already have an active booking for this session.")
         return redirect("session_detail", session_id=session.id)
 
     if request.method == "POST":
@@ -37,3 +39,15 @@ def create_booking(request, session_id):
 def my_bookings(request):
     bookings = Booking.objects.filter(user=request.user).select_related("session", "session__trainer", "session__sport_type", "session__location").order_by("-created_at")
     return render(request, "bookings/my_bookings.html", {"bookings": bookings})
+
+@login_required
+def cancel_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+
+    if request.method == "POST":
+        booking.status = "cancelled"
+        booking.save()
+        messages.success(request, "Your booking was cancelled successfully.")
+        return redirect("my_bookings")
+
+    return render(request, "bookings/cancel_booking.html", {"booking": booking})

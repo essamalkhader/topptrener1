@@ -28,6 +28,13 @@ My Bookings - ToppTrener
                         <a href="/sessions/{{ booking.session.id }}/" class="btn btn-outline-primary btn-sm">
                             View Session
                         </a>
+
+                        {% if booking.status != "cancelled" %}
+                        <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-outline-danger btn-sm">
+                            Cancel Booking
+                        </a>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

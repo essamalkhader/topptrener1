@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cancel Booking - ToppTrener
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="mb-3">Cancel Booking</h1>
+
+                <p>Are you sure you want to cancel this booking?</p>
+
+                <ul class="list-unstyled">
+                    <li><strong>Session:</strong> {{ booking.session.title }}</li>
+                    <li><strong>Trainer:</strong> {{ booking.session.trainer.user.username }}</li>
+                    <li><strong>Location:</strong> {{ booking.session.location.name }}</li>
+                    <li><strong>Start:</strong> {{ booking.session.start_datetime }}</li>
+                    <li><strong>Status:</strong> {{ booking.get_status_display }}</li>
+                </ul>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, Cancel Booking</button>
+                    <a href="{% url 'my_bookings' %}" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
