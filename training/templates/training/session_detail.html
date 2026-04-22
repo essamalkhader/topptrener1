@@ -1,42 +1,170 @@
 {% extends "base.html" %}
-
-{% block title %}
-{{ session.title }} - ToppTrener
-{% endblock %}
+{% block title %}{{ session.title }} — ToppTrener{% endblock %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-body">
-        <h1 class="card-title mb-3">{{ session.title }}</h1>
 
-        <p class="card-text">{{ session.description }}</p>
-
-        <ul class="list-unstyled">
-            <li><strong>Trainer:</strong> {{ session.trainer.user.username }}</li>
-            <li><strong>Sport:</strong> {{ session.sport_type.name }}</li>
-            <li><strong>Location:</strong> {{ session.location.name }}</li>
-            <li><strong>Address:</strong> {{ session.location.address }}</li>
-            <li><strong>City:</strong> {{ session.location.city }}</li>
-            <li><strong>Start:</strong> {{ session.start_datetime }}</li>
-            <li><strong>Duration:</strong> {{ session.duration_minutes }} minutes</li>
-            <li><strong>Level:</strong> {{ session.get_level_display }}</li>
-            <li><strong>Capacity:</strong> {{ session.capacity }}</li>
-            <li><strong>Price:</strong> {{ session.price_per_person }}</li>
-            <li><strong>Group session:</strong> {{ session.is_group|yesno:"Yes,No" }}</li>
-            <li><strong>Status:</strong> {{ session.get_status_display }}</li>
-        </ul>
-
-        <hr>
-
-        {% if user.is_authenticated %}
-            <a href="{% url 'create_booking' session.id %}" class="btn btn-success">Book Session</a>
-        {% else %}
-            <p>
-                <a href="{% url 'login' %}">Login</a> to book this session.
-            </p>
-        {% endif %}
-
-        <a href="/sessions/" class="btn btn-secondary">Back to Sessions</a>
+<!-- PAGE HEADER -->
+<section class="bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <a href="/sessions/" class="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-primary transition-colors mb-4">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            Back to Sessions
+        </a>
+        <div class="flex flex-wrap items-center gap-3 mt-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                {{ session.sport_type.name }}
+            </span>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                {% if session.level == 'beginner' %}bg-emerald-100 text-emerald-700
+                {% elif session.level == 'intermediate' %}bg-amber-100 text-amber-700
+                {% else %}bg-red-100 text-red-700{% endif %}">
+                {{ session.get_level_display }}
+            </span>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                {% if session.status == 'scheduled' %}bg-blue-100 text-blue-700
+                {% elif session.status == 'completed' %}bg-slate-100 text-slate-600
+                {% else %}bg-red-100 text-red-600{% endif %}">
+                {{ session.get_status_display }}
+            </span>
+        </div>
+        <h1 class="text-4xl font-black text-slate-900 tracking-tight mt-3">{{ session.title }}</h1>
     </div>
-</div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <!-- LEFT: Session Info -->
+        <div class="lg:col-span-2 flex flex-col gap-8">
+
+            <!-- Description -->
+            {% if session.description %}
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+                <h2 class="text-lg font-bold text-slate-900 mb-3">About this session</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">{{ session.description }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Details -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+                <h2 class="text-lg font-bold text-slate-900 mb-5">Session Details</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-xl">person</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Trainer</p>
+                            <p class="text-sm font-semibold text-slate-800">
+                                {{ session.trainer.user.get_full_name|default:session.trainer.user.username }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-xl">calendar_today</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Date & Time</p>
+                            <p class="text-sm font-semibold text-slate-800">{{ session.start_datetime|date:"D, d M Y" }}</p>
+                            <p class="text-xs text-slate-500">{{ session.start_datetime|date:"H:i" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-xl">schedule</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Duration</p>
+                            <p class="text-sm font-semibold text-slate-800">{{ session.duration_minutes }} minutes</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-xl">location_on</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Location</p>
+                            <p class="text-sm font-semibold text-slate-800">{{ session.location.name }}</p>
+                            <p class="text-xs text-slate-500">{{ session.location.address }}, {{ session.location.city }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-xl">group</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Session Type</p>
+                            <p class="text-sm font-semibold text-slate-800">{{ session.is_group|yesno:"Group Session,1-on-1 Session" }}</p>
+                            <p class="text-xs text-slate-500">Capacity: {{ session.capacity }} people</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-xl">fitness_center</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Sport</p>
+                            <p class="text-sm font-semibold text-slate-800">{{ session.sport_type.name }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Booking Panel -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-xl border border-slate-200 p-6 sticky top-24 shadow-sm">
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">Price per person</p>
+                <div class="flex items-baseline gap-1 mb-6">
+                    <span class="text-4xl font-black text-slate-900">{{ session.price_per_person }}</span>
+                    <span class="text-lg font-bold text-slate-400">NOK</span>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-500">Level</span>
+                        <span class="font-semibold text-slate-800">{{ session.get_level_display }}</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-500">Duration</span>
+                        <span class="font-semibold text-slate-800">{{ session.duration_minutes }} min</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-500">Status</span>
+                        <span class="font-semibold text-slate-800">{{ session.get_status_display }}</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-100 pt-5">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'create_booking' session.id %}"
+                           class="w-full block text-center px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                            Book This Session
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}"
+                           class="w-full block text-center px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                            Login to Book
+                        </a>
+                        <p class="text-xs text-slate-400 text-center mt-3">
+                            Don't have an account?
+                            <a href="{% url 'signup' %}" class="text-primary font-semibold hover:underline">Sign up free</a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Membership Plans - ToppTrener
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Membership Plans</h1>
+
+{% if plans %}
+    <div class="row">
+        {% for plan in plans %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ plan.name }}</h3>
+                        <p><strong>Monthly Price:</strong> {{ plan.monthly_price }}</p>
+                        <p><strong>Monthly Credits:</strong> {{ plan.monthly_credits }}</p>
+
+                        <a href="{% url 'subscribe_membership' plan.id %}" class="btn btn-primary">Choose Plan</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No membership plans are available right now.</p>
+{% endif %}
+{% endblock %}

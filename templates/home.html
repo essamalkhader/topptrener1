@@ -1,15 +1,95 @@
 {% extends "base.html" %}
-
-{% block title %}
-Home - ToppTrener
-{% endblock %}
+{% block title %}ToppTrener — Book Professional Training{% endblock %}
 
 {% block content %}
 
-<h1>Welcome to ToppTrener</h1>
+<!-- HERO SECTION -->
+<section class="bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-20 flex flex-col items-center text-center gap-6">
+        <span class="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full">
+            <span class="material-symbols-outlined text-base">sports_soccer</span>
+            Professional Sports Training in Oslo
+        </span>
 
-<p>
-Find and book professional sports training sessions in Oslo.
-</p>
+        <h1 class="text-5xl sm:text-6xl font-black text-slate-900 tracking-tight leading-tight max-w-3xl">
+            Find Your Perfect <span class="text-primary">Training Session</span>
+        </h1>
+
+        <p class="text-lg text-slate-500 max-w-xl">
+            Browse sessions led by expert coaches, book your spot in seconds, and track your progress — all in one place.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-2">
+            <a href="/sessions/"
+               class="px-8 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/25">
+                Browse Sessions
+            </a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'signup' %}"
+               class="px-8 py-3 rounded-lg border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-50 transition-all">
+                Create Free Account
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="max-w-6xl mx-auto px-4 py-20">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight">Everything you need to train smarter</h2>
+        <p class="text-slate-500 mt-3 text-base">A platform built for athletes who take their performance seriously.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Feature 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-8 flex flex-col gap-4 hover:shadow-lg transition-shadow">
+            <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-2xl">calendar_month</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Easy Booking</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">
+                Browse available sessions, pick your time slot, and confirm your booking in just a few clicks.
+            </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-8 flex flex-col gap-4 hover:shadow-lg transition-shadow">
+            <div class="h-12 w-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+                <span class="material-symbols-outlined text-2xl">card_membership</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Membership Plans</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">
+                Subscribe to a plan and use credits to book sessions at a discounted rate. Upgrade anytime.
+            </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-8 flex flex-col gap-4 hover:shadow-lg transition-shadow">
+            <div class="h-12 w-12 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-600">
+                <span class="material-symbols-outlined text-2xl">person</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Expert Coaches</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">
+                Train with certified professionals across football, strength & conditioning, yoga, and more.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="bg-slate-900 py-16 mt-4">
+    <div class="max-w-6xl mx-auto px-4 text-center flex flex-col items-center gap-6">
+        <h2 class="text-3xl font-black text-white tracking-tight">Ready to start training?</h2>
+        <p class="text-slate-400 text-base max-w-md">Join hundreds of athletes already using ToppTrener to reach their goals.</p>
+        <a href="/sessions/"
+           class="px-8 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 inline-flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+            Browse Sessions
+        </a>
+    </div>
+</section>
 
 {% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Subscribe - ToppTrener
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="mb-3">Confirm Membership Subscription</h1>
+
+                <p>Are you sure you want to subscribe to this plan?</p>
+
+                <ul class="list-unstyled">
+                    <li><strong>Plan:</strong> {{ plan.name }}</li>
+                    <li><strong>Monthly Price:</strong> {{ plan.monthly_price }}</li>
+                    <li><strong>Monthly Credits:</strong> {{ plan.monthly_credits }}</li>
+                </ul>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Confirm Subscription</button>
+                    <a href="{% url 'membership_plans' %}" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
