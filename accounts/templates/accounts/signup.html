@@ -1,20 +1,65 @@
 {% extends "base.html" %}
-
-{% block title %}
-Sign Up - ToppTrener
-{% endblock %}
+{% block title %}Sign Up - ToppTrener{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2 class="mb-4">Create an Account</h2>
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md">
 
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <div class="bg-primary p-2 rounded-lg text-white">
+                    <span class="material-symbols-outlined block text-2xl">sports_soccer</span>
+                </div>
+                <span class="text-2xl font-bold tracking-tight">ToppTrener</span>
+            </div>
+            <h1 class="text-3xl font-black text-slate-900">Create your account</h1>
+            <p class="text-slate-500 mt-1 text-sm">Join ToppTrener and start booking training sessions.</p>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
+        <!-- Card -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-xl p-8">
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">
+                        {{ field.label }}
+                    </label>
+                    <input
+                        type="{{ field.field.widget.input_type }}"
+                        name="{{ field.html_name }}"
+                        id="{{ field.auto_id }}"
+                        placeholder="{{ field.label }}"
+                        {% if field.value %}value="{{ field.value }}"{% endif %}
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all
+                        {% if field.errors %}border-red-400{% endif %}"
+                    />
+                    {% if field.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ field.errors|join:", " }}</p>
+                    {% endif %}
+                    {% if field.help_text %}
+                    <p class="text-slate-400 text-xs">{{ field.help_text }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <!-- Submit -->
+                <button type="submit"
+                        class="w-full py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 mt-2">
+                    Create Account
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Login link -->
+        <p class="text-center text-sm text-slate-500 mt-6">
+            Already have an account?
+            <a href="{% url 'login' %}" class="text-primary font-semibold hover:underline">Sign in</a>
+        </p>
+
     </div>
 </div>
 {% endblock %}

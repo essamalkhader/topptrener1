@@ -1,61 +1,212 @@
 {% extends "base.html" %}
-
-{% block title %}
-My Bookings - ToppTrener
-{% endblock %}
+{% block title %}My Bookings - ToppTrener{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">My Bookings</h1>
-{% if active_membership %}
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <h4 class="card-title">Active Membership</h4>
-            <p><strong>Plan:</strong> {{ active_membership.plan.name }}</p>
-            <p><strong>Remaining Credits:</strong> {{ active_membership.remaining_credits }}</p>
-            <p><strong>Valid Until:</strong> {{ active_membership.end_date }}</p>
+
+<!-- PAGE HEADER -->
+<section class="bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-3xl font-black text-slate-900 tracking-tight">My Bookings</h1>
+            <p class="text-slate-500 mt-1 text-sm">Manage your training sessions and track your progress.</p>
+        </div>
+        <a href="/sessions/"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+            <span class="material-symbols-outlined text-base">add</span>
+            Book New Session
+        </a>
+    </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+
+    <!-- MEMBERSHIP BANNER -->
+    {% if active_membership %}
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-6 flex items-center gap-4 shadow-sm">
+            <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined">token</span>
+            </div>
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Credits Balance</p>
+                <p class="text-3xl font-bold text-slate-900">{{ active_membership.remaining_credits }}</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 flex items-center gap-4 shadow-sm">
+            <div class="h-12 w-12 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500">
+                <span class="material-symbols-outlined">workspace_premium</span>
+            </div>
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Active Plan</p>
+                <p class="text-3xl font-bold text-slate-900">{{ active_membership.plan.name }}</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 flex items-center gap-4 shadow-sm">
+            <div class="h-12 w-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                <span class="material-symbols-outlined">calendar_month</span>
+            </div>
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Valid Until</p>
+                <p class="text-xl font-bold text-slate-900">{{ active_membership.end_date|date:"d M Y" }}</p>
+            </div>
         </div>
     </div>
-{% else %}
-    <div class="alert alert-info mb-4">
-        You do not have an active membership.
-        <a href="{% url 'membership_plans' %}">View membership plans</a>.
+    {% else %}
+    <div class="flex items-center gap-4 bg-blue-50 border border-blue-200 rounded-xl p-4">
+        <span class="material-symbols-outlined text-blue-500">info</span>
+        <p class="text-sm text-blue-700">
+            You don't have an active membership.
+            <a href="{% url 'membership_plans' %}" class="font-bold underline hover:text-blue-900">View membership plans</a>
+            to get credits and save on bookings.
+        </p>
     </div>
-{% endif %}
+    {% endif %}
 
-{% if bookings %}
-    <div class="row">
-        {% for booking in bookings %}
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ booking.session.title }}</h5>
+    <!-- UPCOMING BOOKINGS -->
+    {% with upcoming=bookings|dictsort:"session.start_datetime" %}
+    <div>
+        <div class="flex items-center justify-between mb-5">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">event_upcoming</span>
+                Upcoming Bookings
+            </h2>
+        </div>
 
-                        <ul class="list-unstyled">
-                            <li><strong>Trainer:</strong> {{ booking.session.trainer.user.username }}</li>
-                            <li><strong>Sport:</strong> {{ booking.session.sport_type.name }}</li>
-                            <li><strong>Location:</strong> {{ booking.session.location.name }}</li>
-                            <li><strong>Start:</strong> {{ booking.session.start_datetime }}</li>
-                            <li><strong>Seats:</strong> {{ booking.seats }}</li>
-                            <li><strong>Status:</strong> {{ booking.get_status_display }}</li>
-                            <li><strong>Booked on:</strong> {{ booking.created_at }}</li>
-                        </ul>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for booking in bookings %}
+                {% if booking.status == "confirmed" %}
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex flex-col gap-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                                    {{ booking.session.sport_type.name }}
+                                </span>
+                                <h3 class="font-bold text-lg text-slate-900 mt-2 leading-snug">{{ booking.session.title }}</h3>
+                                <p class="text-sm text-slate-500 flex items-center gap-1 mt-1">
+                                    <span class="material-symbols-outlined text-sm">person</span>
+                                    {{ booking.session.trainer.user.get_full_name|default:booking.session.trainer.user.username }}
+                                </p>
+                            </div>
+                            <span class="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-bold shrink-0">
+                                Confirmed
+                            </span>
+                        </div>
 
-                        <a href="/sessions/{{ booking.session.id }}/" class="btn btn-outline-primary btn-sm">
-                            View Session
-                        </a>
+                        <div class="flex flex-wrap gap-4 text-xs font-medium text-slate-600">
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                {{ booking.session.start_datetime|date:"d M Y" }}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">schedule</span>
+                                {{ booking.session.start_datetime|date:"H:i" }}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">location_on</span>
+                                {{ booking.session.location.name }}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">group</span>
+                                {{ booking.seats }} seat{{ booking.seats|pluralize }}
+                            </span>
+                        </div>
 
-                        {% if booking.status != "cancelled" %}
-                        <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-outline-danger btn-sm">
-                            Cancel Booking
-                        </a>
-                        {% endif %}
-
+                        <div class="flex gap-3 pt-2 border-t border-slate-100">
+                            <a href="/sessions/{{ booking.session.id }}/"
+                               class="flex-1 text-xs font-bold py-2 px-4 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-base">visibility</span>
+                                View Session
+                            </a>
+                            <a href="{% url 'cancel_booking' booking.id %}"
+                               class="flex-1 text-xs font-bold py-2 px-4 rounded-lg text-rose-600 hover:bg-rose-50 transition-colors flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-base">close</span>
+                                Cancel
+                            </a>
+                        </div>
                     </div>
                 </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Check if no upcoming bookings -->
+        {% if not bookings %}
+        <div class="flex flex-col items-center justify-center py-16 gap-3 text-center bg-white rounded-xl border border-slate-200">
+            <div class="h-14 w-14 rounded-full bg-slate-100 flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl text-slate-400">calendar_month</span>
             </div>
-        {% endfor %}
+            <h3 class="text-lg font-bold text-slate-900">No upcoming bookings</h3>
+            <p class="text-slate-500 text-sm">Ready to train? Browse available sessions.</p>
+            <a href="/sessions/" class="mt-2 px-5 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
+                Browse Sessions
+            </a>
+        </div>
+        {% endif %}
     </div>
-{% else %}
-    <p>You have no bookings yet.</p>
-{% endif %}
+    {% endwith %}
+
+    <!-- PAST & CANCELLED BOOKINGS -->
+    <div>
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2 mb-5">
+            <span class="material-symbols-outlined text-slate-400">history</span>
+            Past & Cancelled Bookings
+        </h2>
+
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Session</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Seats</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for booking in bookings %}
+                            {% if booking.status != "confirmed" %}
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <p class="font-bold text-slate-900">{{ booking.session.title }}</p>
+                                    <p class="text-xs text-slate-500">{{ booking.session.sport_type.name }}</p>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600">
+                                    {{ booking.session.start_datetime|date:"d M Y" }}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600">
+                                    {{ booking.seats }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wide
+                                        {% if booking.status == 'completed' %}bg-emerald-100 text-emerald-700
+                                        {% elif booking.status == 'cancelled' %}bg-slate-100 text-slate-500
+                                        {% endif %}">
+                                        {{ booking.get_status_display }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="/sessions/{{ booking.session.id }}/" class="text-primary hover:text-primary/80 text-sm font-bold">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="px-6 py-10 text-center text-slate-400 text-sm">
+                                No past bookings yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
 {% endblock %}
