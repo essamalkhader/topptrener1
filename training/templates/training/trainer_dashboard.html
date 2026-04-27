@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Trainer Dashboard - ToppTrener{% endblock %}
+
+{% block content %}
+
+<!-- HEADER -->
+<section class="bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-3xl font-black text-slate-900 tracking-tight">Trainer Dashboard</h1>
+            <p class="text-slate-500 mt-1 text-sm">Manage your sessions and track bookings.</p>
+        </div>
+        <a href="{% url 'create_session' %}"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+            <span class="material-symbols-outlined text-base">add</span>
+            Create New Session
+        </a>
+    </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+
+    <!-- STATS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-6 flex items-center gap-4 shadow-sm">
+            <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined">calendar_month</span>
+            </div>
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Upcoming Sessions</p>
+                <p class="text-3xl font-bold text-slate-900">{{ upcoming_sessions.count }}</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 flex items-center gap-4 shadow-sm">
+            <div class="h-12 w-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                <span class="material-symbols-outlined">history</span>
+            </div>
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Past Sessions</p>
+                <p class="text-3xl font-bold text-slate-900">{{ past_sessions.count }}</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 flex items-center gap-4 shadow-sm">
+            <div class="h-12 w-12 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500">
+                <span class="material-symbols-outlined">verified</span>
+            </div>
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Specialties</p>
+                <p class="text-sm font-bold text-slate-900 truncate">{{ trainer.specialties|default:"Not set" }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPCOMING SESSIONS -->
+    <div>
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2 mb-5">
+            <span class="material-symbols-outlined text-primary">event_upcoming</span>
+            Upcoming Sessions
+        </h2>
+
+        {% if upcoming_sessions %}
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Session</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Bookings</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Capacity</th>
+                            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for session in upcoming_sessions %}
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <p class="font-bold text-slate-900">{{ session.title }}</p>
+                                <p class="text-xs text-slate-500">{{ session.sport_type.name }}</p>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-slate-600">
+                                {{ session.start_datetime|date:"d M Y • H:i" }}
+                            </td>
+                            <td class="px-6 py-4 text-sm font-bold text-slate-900">
+                                {{ session.bookings.filter.count|default:session.bookings.count }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-slate-600">
+                                {{ session.capacity }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">
+                                    {{ session.get_status_display }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="flex flex-col items-center justify-center py-16 gap-3 text-center bg-white rounded-xl border border-slate-200">
+            <span class="material-symbols-outlined text-3xl text-slate-400">calendar_month</span>
+            <h3 class="text-lg font-bold text-slate-900">No upcoming sessions</h3>
+            <a href="{% url 'create_session' %}" class="px-5 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
+                Create your first session
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+</section>
+{% endblock %}

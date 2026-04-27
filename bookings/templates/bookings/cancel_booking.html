@@ -1,33 +1,75 @@
 {% extends "base.html" %}
-
-{% block title %}
-Cancel Booking - ToppTrener
-{% endblock %}
+{% block title %}Cancel Booking - ToppTrener{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h1 class="mb-3">Cancel Booking</h1>
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-lg">
 
-                <p>Are you sure you want to cancel this booking?</p>
+        <!-- Warning Icon -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+                <span class="material-symbols-outlined text-3xl text-red-500">warning</span>
+            </div>
+            <h1 class="text-3xl font-black text-slate-900">Cancel Booking</h1>
+            <p class="text-slate-500 mt-1 text-sm">Are you sure you want to cancel this booking?</p>
+        </div>
 
-                <ul class="list-unstyled">
-                    <li><strong>Session:</strong> {{ booking.session.title }}</li>
-                    <li><strong>Trainer:</strong> {{ booking.session.trainer.user.username }}</li>
-                    <li><strong>Location:</strong> {{ booking.session.location.name }}</li>
-                    <li><strong>Start:</strong> {{ booking.session.start_datetime }}</li>
-                    <li><strong>Status:</strong> {{ booking.get_status_display }}</li>
-                </ul>
+        <!-- Card -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
 
-                <form method="post">
+            <!-- Session Summary -->
+            <div class="p-6 border-b border-slate-100">
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                            {{ booking.session.sport_type.name }}
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">{{ booking.session.title }}</h3>
+                    <div class="space-y-2 mt-1">
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">person</span>
+                            {{ booking.session.trainer.user.get_full_name|default:booking.session.trainer.user.username }}
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">calendar_today</span>
+                            {{ booking.session.start_datetime|date:"D, d M Y • H:i" }}
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                            {{ booking.session.location.name }}, {{ booking.session.location.city }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credit Refund Notice -->
+            {% if booking.used_credits %}
+            <div class="px-6 py-4 bg-amber-50 border-b border-amber-100 flex items-start gap-3">
+                <span class="material-symbols-outlined text-amber-500 text-xl mt-0.5">info</span>
+                <p class="text-sm text-amber-700">
+                    <strong>Credit refund:</strong> Since you used credits for this booking, they will be refunded to your membership if you cancel more than 3 hours before the session starts.
+                </p>
+            </div>
+            {% endif %}
+
+            <!-- Actions -->
+            <div class="p-6 flex flex-col sm:flex-row gap-3">
+                <a href="{% url 'my_bookings' %}"
+                   class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-colors text-center">
+                    Keep Booking
+                </a>
+                <form method="post" class="flex-1">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Yes, Cancel Booking</button>
-                    <a href="{% url 'my_bookings' %}" class="btn btn-secondary">Back</a>
+                    <button type="submit"
+                            class="w-full px-6 py-3 rounded-lg bg-red-500 text-white font-bold text-sm hover:bg-red-600 transition-all shadow-lg shadow-red-500/20">
+                        Yes, Cancel Booking
+                    </button>
                 </form>
             </div>
+
         </div>
+
     </div>
 </div>
 {% endblock %}

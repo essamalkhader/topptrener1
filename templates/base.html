@@ -55,15 +55,23 @@
             </a>
 
             <!-- Nav Links -->
-            <nav class="hidden md:flex items-center gap-6">
+             <nav class="hidden md:flex items-center gap-6">
                 <a href="/" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Home</a>
                 <a href="/sessions/" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Sessions</a>
+                
                 {% if user.is_authenticated %}
-                <a href="{% url 'my_bookings' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">My Bookings</a>
-                <a href="{% url 'membership_plans' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Membership</a>
-                {% endif %}
-            </nav>
+                    {% if is_trainer %}
+                       <a href="{% url 'trainer_dashboard' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">My Sessions</a>
+                       <a href="{% url 'create_session' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Create Session</a>
+                    {% else %}
+                       <a href="{% url 'my_bookings' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">My Bookings</a>
+                       <a href="{% url 'membership_plans' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Membership</a>
+                    {% endif %}
+                       <a href="{% url 'profile' %}" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Profile</a>
+                {% endif %}   
 
+             </nav>
+        
             <!-- Auth -->
             <div class="flex items-center gap-3">
                 {% if user.is_authenticated %}

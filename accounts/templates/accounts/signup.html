@@ -14,7 +14,7 @@
                 <span class="text-2xl font-bold tracking-tight">ToppTrener</span>
             </div>
             <h1 class="text-3xl font-black text-slate-900">Create your account</h1>
-            <p class="text-slate-500 mt-1 text-sm">Join ToppTrener and start booking training sessions.</p>
+            <p class="text-slate-500 mt-1 text-sm">Join ToppTrener and start your fitness journey.</p>
         </div>
 
         <!-- Card -->
@@ -22,39 +22,70 @@
             <form method="post" class="space-y-5">
                 {% csrf_token %}
 
-                {% for field in form %}
+                <!-- Username -->
                 <div class="space-y-1.5">
-                    <label class="block text-sm font-semibold text-slate-700">
-                        {{ field.label }}
-                    </label>
-                    <input
-                        type="{{ field.field.widget.input_type }}"
-                        name="{{ field.html_name }}"
-                        id="{{ field.auto_id }}"
-                        placeholder="{{ field.label }}"
-                        {% if field.value %}value="{{ field.value }}"{% endif %}
-                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all
-                        {% if field.errors %}border-red-400{% endif %}"
-                    />
-                    {% if field.errors %}
-                    <p class="text-red-500 text-xs mt-1">{{ field.errors|join:", " }}</p>
-                    {% endif %}
-                    {% if field.help_text %}
-                    <p class="text-slate-400 text-xs">{{ field.help_text }}</p>
-                    {% endif %}
+                    <label class="block text-sm font-semibold text-slate-700">Username</label>
+                    <input type="text" name="username" placeholder="Username" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                    <p class="text-xs text-slate-400">150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
                 </div>
-                {% endfor %}
+
+                <!-- Email -->
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Email</label>
+                    <input type="email" name="email" placeholder="Email" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Password</label>
+                    <input type="password" name="password1" placeholder="Password" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Confirm Password</label>
+                    <input type="password" name="password2" placeholder="Confirm Password" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+
+                <!-- Trainer Checkbox -->
+                <div class="flex items-start gap-3 p-4 rounded-lg bg-primary/5 border border-primary/20">
+                    <input type="checkbox" name="is_trainer" id="is_trainer"
+                        class="h-4 w-4 mt-0.5 rounded border-slate-300 text-primary focus:ring-primary"/>
+                    <div>
+                        <label for="is_trainer" class="text-sm font-semibold text-slate-700 cursor-pointer">
+                            I want to register as a trainer
+                        </label>
+                        <p class="text-xs text-slate-500 mt-0.5">Check this if you are a coach offering training sessions.</p>
+                    </div>
+                </div>
+
+                <!-- Errors -->
+                {% if form.errors %}
+                <div class="flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-700">
+                    <span class="material-symbols-outlined text-base">error</span>
+                    <div>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
 
                 <!-- Submit -->
                 <button type="submit"
-                        class="w-full py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 mt-2">
+                        class="w-full py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
                     Create Account
                 </button>
 
             </form>
         </div>
 
-        <!-- Login link -->
         <p class="text-center text-sm text-slate-500 mt-6">
             Already have an account?
             <a href="{% url 'login' %}" class="text-primary font-semibold hover:underline">Sign in</a>

@@ -94,20 +94,22 @@ def cancel_booking(request, booking_id):
 
         refund_deadline = booking.session.start_datetime - timedelta(hours=3)
 
-        if booking.used_credits and timezone.now() <= refund_deadline:
-            active_membership = Membership.objects.filter(
-                user=request.user,
-                is_active=True
-            ).first()
-
-            if active_membership:
-                active_membership.remaining_credits += booking.seats
-                active_membership.save()
-                messages.success(request, "Your booking was cancelled and your credits were refunded.")
+        if timezone.now() <= refund_deadline:
+            if booking.used_credits:
+                active_membership = Membership.objects.filter(
+                    user=request.user,
+                    is_active=True
+                ).first()
+                if active_membership:
+                    active_membership.remaining_credits += booking.seats
+                    active_membership.save()
+                    messages.success(request, "Your booking was cancelled and your credits have been refunded to your membership.")
+                else:
+                    messages.success(request, "Your booking was cancelled. Please contact us for your credit refund.")
             else:
-                messages.warning(request, "Your booking was cancelled, but no active membership was found for credit refund.")
+                messages.success(request, "Your booking was cancelled. A refund will be processed within 3-5 business days.")
         else:
-            messages.success(request, "Your booking was cancelled successfully.")
+            messages.warning(request, "Your booking was cancelled. No refund is available as cancellation was made less than 3 hours before the session.")
 
         booking.status = "cancelled"
         booking.save()
