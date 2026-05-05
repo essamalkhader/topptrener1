@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Leave a Review - ToppTrener{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-lg">
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-amber-100 mb-4">
+                <span class="material-symbols-outlined text-3xl text-amber-500">star</span>
+            </div>
+            <h1 class="text-3xl font-black text-slate-900">Leave a Review</h1>
+            <p class="text-slate-500 mt-1 text-sm">Share your experience to help others.</p>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
+
+            <!-- Session Info -->
+            <div class="p-6 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">{{ booking.session.title }}</h3>
+                <p class="text-sm text-slate-500 mt-1">
+                    with {{ booking.session.trainer.user.get_full_name|default:booking.session.trainer.user.username }}
+                    · {{ booking.session.start_datetime|date:"d M Y" }}
+                </p>
+            </div>
+
+            <!-- Form -->
+            <form method="post" class="p-6 space-y-6">
+                {% csrf_token %}
+
+                <!-- Star Rating -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-semibold text-slate-700">Your Rating</label>
+                    <div class="flex items-center gap-2" id="star-container">
+                        {% for i in "12345" %}
+                        <button type="button"
+                                onclick="setRating({{ forloop.counter }})"
+                                id="star-{{ forloop.counter }}"
+                                class="text-4xl text-slate-300 hover:text-amber-400 transition-colors focus:outline-none">
+                            ★
+                        </button>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" name="rating" id="rating-input" value="0"/>
+                    <p class="text-xs text-slate-400" id="rating-label">Click a star to rate</p>
+                </div>
+
+                <!-- Comment -->
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">
+                        Your Comment <span class="text-slate-400 font-normal">(Optional)</span>
+                    </label>
+                    <textarea name="comment" rows="4"
+                        placeholder="Share your experience with this session..."
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none">{{ form.comment.value|default:"" }}</textarea>
+                </div>
+
+                <!-- Error -->
+                {% if form.errors %}
+                <div class="flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-700">
+                    <span class="material-symbols-outlined text-base">error</span>
+                    Please select a star rating before submitting.
+                </div>
+                {% endif %}
+
+                <!-- Actions -->
+                <div class="flex gap-3">
+                    <a href="{% url 'my_bookings' %}"
+                       class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-colors text-center">
+                        Cancel
+                    </a>
+                    <button type="submit" onclick="return validateRating()"
+                            class="flex-[2] px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                        Submit Review
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const labels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
+
+    function setRating(value) {
+        document.getElementById("rating-input").value = value;
+        document.getElementById("rating-label").textContent = labels[value];
+        for (let i = 1; i <= 5; i++) {
+            const star = document.getElementById("star-" + i);
+            star.classList.toggle("text-amber-400", i <= value);
+            star.classList.toggle("text-slate-300", i > value);
+        }
+    }
+
+    function validateRating() {
+        const rating = document.getElementById("rating-input").value;
+        if (!rating || rating == 0) {
+            alert("Please select a star rating.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+{% endblock %}

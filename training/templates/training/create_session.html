@@ -14,58 +14,128 @@
     </div>
 
     <div class="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
-        <form method="post" class="p-6 sm:p-8 space-y-5">
+        <form method="post" enctype="multipart/form-data" class="p-6 sm:p-8 space-y-6">
             {% csrf_token %}
 
-            {% for field in form %}
+            <!-- Session Photo -->
             <div class="space-y-1.5">
-                <label class="block text-sm font-semibold text-slate-700">
-                    {{ field.label }}
-                </label>
-                {% if field.field.widget.input_type == "select" %}
-                <select name="{{ field.html_name }}"
-                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all">
-                    {% for choice in field.field.choices %}
-                    <option value="{{ choice.0 }}" {% if field.value == choice.0|stringformat:"s" %}selected{% endif %}>
-                        {{ choice.1 }}
-                    </option>
-                    {% endfor %}
-                </select>
-                {% elif field.field.widget.input_type == "textarea" %}
-                <textarea
-                    name="{{ field.html_name }}"
-                    rows="3"
-                    placeholder="{{ field.label }}"
-                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
-                >{{ field.value|default:"" }}</textarea>
-                {% elif field.field.widget.input_type == "checkbox" %}
-                <div class="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        name="{{ field.html_name }}"
-                        id="{{ field.auto_id }}"
-                        {% if field.value %}checked{% endif %}
-                        class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
-                    />
-                    <span class="text-sm text-slate-600">Yes, this is a group session</span>
-                </div>
-                {% else %}
-                <input
-                    type="{{ field.field.widget.input_type }}"
-                    name="{{ field.html_name }}"
-                    id="{{ field.auto_id }}"
-                    placeholder="{{ field.label }}"
-                    value="{{ field.value|default:'' }}"
-                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                />
-                {% endif %}
-
-                {% if field.errors %}
-                <p class="text-red-500 text-xs mt-1">{{ field.errors|join:", " }}</p>
-                {% endif %}
+                <label class="block text-sm font-semibold text-slate-700">Session Photo <span class="text-slate-400 font-normal">(Optional)</span></label>
+                <input type="file" name="photo" accept="image/*"
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-600 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                <p class="text-xs text-slate-400">Upload an attractive image for your session announcement.</p>
             </div>
-            {% endfor %}
 
+            <!-- Title -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Session Title</label>
+                <input type="text" name="title" placeholder="e.g. Advanced Football Drills" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Description <span class="text-slate-400 font-normal">(Optional)</span></label>
+                <textarea name="description" rows="3" placeholder="Describe what participants will do in this session..."
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"></textarea>
+            </div>
+
+            <!-- Sport Type -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Sport Type</label>
+                <input type="text" name="sport_name" placeholder="e.g. Football, Yoga, Padel, Boxing" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                <p class="text-xs text-slate-400">Type the sport name — it will be created automatically if new.</p>
+            </div>
+
+            <!-- Level -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Level</label>
+                <select name="level"
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+
+            <!-- Location Fields -->
+            <div class="rounded-xl border border-slate-100 bg-slate-50 p-4 space-y-4">
+                <p class="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-base text-primary">location_on</span>
+                    Location Details
+                </p>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium text-slate-600">Location Name</label>
+                    <input type="text" name="location_name" placeholder="e.g. Frogner Park" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"/>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium text-slate-600">Address <span class="text-slate-400">(Optional)</span></label>
+                    <input type="text" name="location_address" placeholder="e.g. Middelthunsgate 28"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"/>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium text-slate-600">City</label>
+                    <input type="text" name="location_city" placeholder="Oslo" value="Oslo"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"/>
+                </div>
+            </div>
+
+            <!-- Date & Time -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Date & Time</label>
+                <input type="datetime-local" name="start_datetime" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Duration & Capacity -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Duration (minutes)</label>
+                    <input type="number" name="duration_minutes" placeholder="60" min="15" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Capacity</label>
+                    <input type="number" name="capacity" placeholder="10" min="1" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Price per Person (NOK)</label>
+                <input type="number" name="price_per_person" placeholder="299" min="0" step="0.01" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Group Session -->
+            <div class="flex items-start gap-3 p-4 rounded-lg bg-primary/5 border border-primary/20">
+                <input type="checkbox" name="is_group" id="is_group"
+                    class="h-4 w-4 mt-0.5 rounded border-slate-300 text-primary focus:ring-primary"/>
+                <div>
+                    <label for="is_group" class="text-sm font-semibold text-slate-700 cursor-pointer">
+                        This is a group session
+                    </label>
+                    <p class="text-xs text-slate-500 mt-0.5">Check this if multiple participants train together.</p>
+                </div>
+            </div>
+
+            <!-- Errors -->
+            {% if form.errors %}
+            <div class="flex items-start gap-2 bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-700">
+                <span class="material-symbols-outlined text-base mt-0.5">error</span>
+                <div>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                        <p>{{ field.label }}: {{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Actions -->
             <div class="pt-2 flex gap-3">
                 <a href="{% url 'trainer_dashboard' %}"
                    class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-colors text-center">
@@ -76,6 +146,7 @@
                     Create Session
                 </button>
             </div>
+
         </form>
     </div>
 </div>

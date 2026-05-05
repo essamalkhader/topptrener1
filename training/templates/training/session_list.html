@@ -18,8 +18,16 @@
         {% for session in sessions %}
         <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
 
-            <!-- Card Top Color Bar based on sport -->
-            <div class="h-2 bg-primary"></div>
+            
+            <!-- Session Photo or Color Bar -->
+                {% if session.photo %}
+                <div class="h-48 overflow-hidden">
+                    <img src="{{ session.photo.url }}" alt="{{ session.title }}"
+                        class="w-full h-full object-cover"/>
+                </div>
+                {% else %}
+                <div class="h-2 bg-primary"></div>
+                {% endif %}
 
             <div class="p-6 flex flex-col gap-4 flex-1">
 
@@ -36,7 +44,7 @@
                     </span>
                 </div>
 
-                <!-- Title & Description -->
+                <!-- Title  Description -->
                 <div>
                     <h3 class="text-lg font-bold text-slate-900 leading-snug">{{ session.title }}</h3>
                     {% if session.description %}
@@ -64,6 +72,22 @@
                     </div>
                 </div>
 
+                <!-- Trainer Rating -->
+                {% with avg=session.trainer.average_rating %}
+                {% if avg %}
+                <div class="flex items-center gap-1">
+                    {% for i in "12345" %}
+                    <span class="text-sm {% if forloop.counter <= avg %}text-amber-400{% else %}text-slate-200{% endif %}">&#9733;</span>
+                    {% endfor %}
+                    <span class="text-xs font-semibold text-slate-600 ml-1">{{ avg }} ({{ session.trainer.review_count }} review{{ session.trainer.review_count|pluralize }})</span>
+                </div>
+                {% else %}
+                <div class="flex items-center gap-1">
+                    <span class="text-xs text-slate-400">No reviews yet</span>
+                </div>
+                {% endif %}
+                {% endwith %}
+
                 <!-- Footer: Price + Button -->
                 <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
                     <div>
@@ -71,7 +95,7 @@
                         <span class="text-xs text-slate-400 block">per person</span>
                     </div>
                     <a href="/sessions/{{ session.id }}/"
-                       class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
+                    class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
                         View Details
                     </a>
                 </div>

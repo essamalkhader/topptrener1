@@ -11,6 +11,16 @@ class TrainerProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def average_rating(self):
+        reviews = self.reviews.all()
+        if reviews.exists():
+            total = sum(r.rating for r in reviews)
+            return round(total / reviews.count(), 1)
+        return None
+
+    def review_count(self):
+        return self.reviews.count()
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth import login
 from .forms import SignUpForm, UserProfileForm, TrainerProfileForm
 from .models import UserProfile, TrainerProfile
 
@@ -20,9 +21,17 @@ def signup(request):
         form = SignUpForm()
     return render(request, "accounts/signup.html", {"form": form})
 
+
+def login_redirect(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+    if TrainerProfile.objects.filter(user=request.user).exists():
+        return redirect("trainer_dashboard")
+    return redirect("my_bookings")
+
+
 @login_required
 def profile(request):
-    # Check if this user is a trainer
     is_trainer = TrainerProfile.objects.filter(user=request.user).exists()
 
     if is_trainer:

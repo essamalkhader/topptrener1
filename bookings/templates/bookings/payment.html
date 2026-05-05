@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Payment - ToppTrener{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-lg">
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 mb-4">
+                <span class="material-symbols-outlined text-3xl text-primary">payment</span>
+            </div>
+            <h1 class="text-3xl font-black text-slate-900">Complete Payment</h1>
+            <p class="text-slate-500 mt-1 text-sm">Secure payment for your training session.</p>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
+
+            <!-- Session Summary -->
+            <div class="p-6 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">{{ session.title }}</h3>
+                <p class="text-sm text-slate-500 mt-1">
+                    {{ session.start_datetime|date:"D, d M Y • H:i" }} &middot;
+                    {{ session.location.name }}
+                </p>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="p-6 border-b border-slate-100 space-y-3">
+                <div class="flex justify-between text-sm text-slate-600">
+                    <span>Price per person</span>
+                    <span>{{ session.price_per_person }} NOK</span>
+                </div>
+                <div class="flex justify-between text-sm text-slate-600">
+                    <span>Seats</span>
+                    <span>{{ seats }}</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold text-slate-900 pt-3 border-t border-slate-200">
+                    <span>Total</span>
+                    <span>{{ total }} NOK</span>
+                </div>
+            </div>
+
+            <!-- No membership notice -->
+            {% if not active_membership %}
+            <div class="px-6 py-4 bg-amber-50 border-b border-amber-100 flex items-start gap-3">
+                <span class="material-symbols-outlined text-amber-500 text-xl mt-0.5">info</span>
+                <p class="text-sm text-amber-700">
+                    You don't have a membership. 
+                    <a href="{% url 'membership_plans' %}" class="font-bold underline">Get a membership plan</a>
+                    to use credits and save on future sessions.
+                </p>
+            </div>
+            {% else %}
+            <div class="px-6 py-4 bg-blue-50 border-b border-blue-100 flex items-start gap-3">
+                <span class="material-symbols-outlined text-blue-500 text-xl mt-0.5">info</span>
+                <p class="text-sm text-blue-700">
+                    You have used all your credits for this month.
+                    {% if can_upgrade %}
+                    <a href="{% url 'membership_plans' %}" class="font-bold underline">Upgrade your plan</a>
+                    to get more credits.
+                    {% endif %}
+                </p>
+            </div>
+            {% endif %}
+
+            <!-- Simulated Payment Form -->
+            <form method="post" class="p-6 space-y-4">
+                {% csrf_token %}
+
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Card Number</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="block text-sm font-semibold text-slate-700">Expiry Date</label>
+                        <input type="text" placeholder="MM/YY" maxlength="5"
+                            class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-sm font-semibold text-slate-700">CVV</label>
+                        <input type="text" placeholder="123" maxlength="3"
+                            class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Name on Card</label>
+                    <input type="text" placeholder="Full name"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <a href="/sessions/{{ session.id }}/"
+                       class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-colors text-center">
+                        Cancel
+                    </a>
+                    <button type="submit"
+                            class="flex-[2] px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                        Pay {{ total }} NOK
+                    </button>
+                </div>
+
+                <p class="text-xs text-slate-400 text-center flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined text-sm">lock</span>
+                    Simulated payment — no real charge will be made
+                </p>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
