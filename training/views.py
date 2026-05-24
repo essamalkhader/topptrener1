@@ -146,3 +146,79 @@ def create_session(request):
         form = SessionForm()
 
     return render(request, "training/create_session.html", {"form": form})
+
+@login_required
+def edit_session(request, session_id):
+    try:
+        trainer = TrainerProfile.objects.get(user=request.user)
+    except TrainerProfile.DoesNotExist:
+        messages.warning(request, "Only trainers can edit sessions.")
+        return redirect("home")
+
+    session = get_object_or_404(Session, id=session_id, trainer=trainer)
+
+    if request.method == "POST":
+        form = SessionForm(request.POST, request.FILES, instance=session)
+        if form.is_valid():
+            updated_session = form.save(commit=False)
+
+            # Handle location
+            location_name = form.cleaned_data["location_name"]
+            location_address = form.cleaned_data.get("location_address", "")
+            location_city = form.cleaned_data.get("location_city", "Oslo")
+            location, created = Location.objects.get_or_create(
+                name=location_name,
+                defaults={"address": location_address, "city": location_city}
+            )
+            updated_session.location = location
+
+            # Handle sport type
+            sport_name = form.cleaned_data["sport_name"]
+            from django.utils.text import slugify
+            sport_type, created = SportType.objects.get_or_create(
+                name__iexact=sport_name,
+                defaults={"name": sport_name, "slug": slugify(sport_name)}
+            )
+            updated_session.sport_type = sport_type
+
+            # Handle Oslo timezone
+            import pytz
+            oslo_tz = pytz.timezone('Europe/Oslo')
+            naive_dt = updated_session.start_datetime.replace(tzinfo=None)
+            updated_session.start_datetime = oslo_tz.localize(naive_dt)
+
+            updated_session.save()
+            messages.success(request, "Session updated successfully.")
+            return redirect("trainer_dashboard")
+    else:
+        # Pre-fill location and sport fields
+        form = SessionForm(instance=session, initial={
+            "location_name": session.location.name,
+            "location_address": session.location.address,
+            "location_city": session.location.city,
+            "sport_name": session.sport_type.name,
+        })
+
+    return render(request, "training/edit_session.html", {
+        "form": form,
+        "session": session,
+    })
+
+
+@login_required
+def cancel_session(request, session_id):
+    try:
+        trainer = TrainerProfile.objects.get(user=request.user)
+    except TrainerProfile.DoesNotExist:
+        messages.warning(request, "Only trainers can cancel sessions.")
+        return redirect("home")
+
+    session = get_object_or_404(Session, id=session_id, trainer=trainer)
+
+    if request.method == "POST":
+        session.status = "cancelled"
+        session.save()
+        messages.success(request, f"Session '{session.title}' has been cancelled.")
+        return redirect("trainer_dashboard")
+
+    return render(request, "training/cancel_session.html", {"session": session})

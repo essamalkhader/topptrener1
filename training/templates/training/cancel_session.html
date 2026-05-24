@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Cancel Session - ToppTrener{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-lg">
+
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+                <span class="material-symbols-outlined text-3xl text-red-500">warning</span>
+            </div>
+            <h1 class="text-3xl font-black text-slate-900">Cancel Session</h1>
+            <p class="text-slate-500 mt-1 text-sm">This will cancel the session for all booked participants.</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
+            <div class="p-6 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                    {{ session.sport_type.name }}
+                </span>
+                <h3 class="text-xl font-bold text-slate-900 mt-2">{{ session.title }}</h3>
+                <div class="space-y-2 mt-3">
+                    <div class="flex items-center gap-2 text-sm text-slate-600">
+                        <span class="material-symbols-outlined text-base text-slate-400">calendar_today</span>
+                        {{ session.start_datetime|date:"D, d M Y • H:i" }}
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-slate-600">
+                        <span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                        {{ session.location.name }}, {{ session.location.city }}
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-slate-600">
+                        <span class="material-symbols-outlined text-base text-slate-400">group</span>
+                        {{ session.bookings.count }} participant{{ session.bookings.count|pluralize }} booked
+                    </div>
+                </div>
+            </div>
+
+            {% if session.bookings.count > 0 %}
+            <div class="px-6 py-4 bg-amber-50 border-b border-amber-100 flex items-start gap-3">
+                <span class="material-symbols-outlined text-amber-500 text-xl mt-0.5">info</span>
+                <p class="text-sm text-amber-700">
+                    <strong>{{ session.bookings.count }} participant{{ session.bookings.count|pluralize }}</strong> will be notified of the cancellation and their credits will be refunded.
+                </p>
+            </div>
+            {% endif %}
+
+            <div class="p-6 flex flex-col sm:flex-row gap-3">
+                <a href="{% url 'trainer_dashboard' %}"
+                   class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-colors text-center">
+                    Keep Session
+                </a>
+                <form method="post" class="flex-1">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="w-full px-6 py-3 rounded-lg bg-red-500 text-white font-bold text-sm hover:bg-red-600 transition-all shadow-lg shadow-red-500/20">
+                        Yes, Cancel Session
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

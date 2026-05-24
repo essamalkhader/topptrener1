@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Edit Session - ToppTrener{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+
+    <div class="mb-8">
+        <a href="{% url 'trainer_dashboard' %}" class="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-primary transition-colors mb-4">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            Back to Dashboard
+        </a>
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Edit Session</h1>
+        <p class="text-slate-500 mt-1 text-sm">Update the details for "{{ session.title }}".</p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
+        <form method="post" enctype="multipart/form-data" class="p-6 sm:p-8 space-y-6">
+            {% csrf_token %}
+
+            <!-- Current Photo -->
+            {% if session.photo %}
+            <div class="space-y-2">
+                <label class="block text-sm font-semibold text-slate-700">Current Photo</label>
+                <img src="{{ session.photo.url }}" alt="{{ session.title }}"
+                     class="h-32 w-full object-cover rounded-lg border border-slate-200"/>
+            </div>
+            {% endif %}
+
+            <!-- Photo Upload -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">
+                    {% if session.photo %}Update Photo{% else %}Add Photo{% endif %}
+                    <span class="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <input type="file" name="photo" accept="image/*"
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-600 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Title -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Session Title</label>
+                <input type="text" name="title" value="{{ session.title }}" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Description <span class="text-slate-400 font-normal">(Optional)</span></label>
+                <textarea name="description" rows="3"
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none">{{ session.description }}</textarea>
+            </div>
+
+            <!-- Sport Type -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Sport Type</label>
+                <input type="text" name="sport_name" value="{{ session.sport_type.name }}" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Level -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Level</label>
+                <select name="level"
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all">
+                    <option value="beginner" {% if session.level == "beginner" %}selected{% endif %}>Beginner</option>
+                    <option value="intermediate" {% if session.level == "intermediate" %}selected{% endif %}>Intermediate</option>
+                    <option value="advanced" {% if session.level == "advanced" %}selected{% endif %}>Advanced</option>
+                </select>
+            </div>
+
+            <!-- Location -->
+            <div class="rounded-xl border border-slate-100 bg-slate-50 p-4 space-y-4">
+                <p class="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-base text-primary">location_on</span>
+                    Location Details
+                </p>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium text-slate-600">Location Name</label>
+                    <input type="text" name="location_name" value="{{ session.location.name }}" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"/>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium text-slate-600">Address</label>
+                    <input type="text" name="location_address" value="{{ session.location.address }}"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"/>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium text-slate-600">City</label>
+                    <input type="text" name="location_city" value="{{ session.location.city }}"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white"/>
+                </div>
+            </div>
+
+            <!-- Date & Time -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Date & Time</label>
+                <input type="datetime-local" name="start_datetime"
+                    value="{{ session.start_datetime|date:'Y-m-d' }}T{{ session.start_datetime|date:'H:i' }}"
+                    required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Duration & Capacity -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Duration (minutes)</label>
+                    <input type="number" name="duration_minutes" value="{{ session.duration_minutes }}" min="15" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-semibold text-slate-700">Capacity</label>
+                    <input type="number" name="capacity" value="{{ session.capacity }}" min="1" required
+                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="space-y-1.5">
+                <label class="block text-sm font-semibold text-slate-700">Price per Person (NOK)</label>
+                <input type="number" name="price_per_person" value="{{ session.price_per_person }}" min="0" step="0.01" required
+                    class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+            </div>
+
+            <!-- Group Session -->
+            <div class="flex items-start gap-3 p-4 rounded-lg bg-primary/5 border border-primary/20">
+                <input type="checkbox" name="is_group" id="is_group"
+                    {% if session.is_group %}checked{% endif %}
+                    class="h-4 w-4 mt-0.5 rounded border-slate-300 text-primary focus:ring-primary"/>
+                <div>
+                    <label for="is_group" class="text-sm font-semibold text-slate-700 cursor-pointer">
+                        This is a group session
+                    </label>
+                    <p class="text-xs text-slate-500 mt-0.5">Check this if multiple participants train together.</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="pt-2 flex gap-3">
+                <a href="{% url 'trainer_dashboard' %}"
+                   class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-colors text-center">
+                    Cancel
+                </a>
+                <button type="submit"
+                        class="flex-[2] px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                    Save Changes
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
