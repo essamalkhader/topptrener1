@@ -622,7 +622,7 @@
   "pk": 17,
   "fields": {
     "password": "pbkdf2_sha256$1200000$oOuXtarHvoUDA4DiXrUyUV$PKAxQqFHXOa1ZUZPP+oaXf+BV8ll1SG+QBv7tC0B9qQ=",
-    "last_login": "2026-05-24T19:39:53.471Z",
+    "last_login": "2026-05-24T21:52:01.234Z",
     "is_superuser": true,
     "username": "Admin",
     "first_name": "",
@@ -640,7 +640,7 @@
   "pk": 18,
   "fields": {
     "password": "pbkdf2_sha256$1200000$8aUdjuEDFu8FtaNIZ0DDM6$uLLxkNB14US4o7ljJPDFTv/0miu7Fbuv6ZTScxOcVdE=",
-    "last_login": null,
+    "last_login": "2026-05-24T21:38:37.721Z",
     "is_superuser": false,
     "username": "erik",
     "first_name": "Erik",
@@ -855,18 +855,18 @@
 },
 {
   "model": "sessions.session",
-  "pk": "6eli9ioqcs0okdo39ovf3a9lcgltwels",
+  "pk": "623m2owdvl7p0bn1hk2y05zqhswz5qec",
   "fields": {
-    "session_data": ".eJxVjLsOAiEURP-F2hDg8rhY2vsNhKesGkiW3cr470qyhU4558y8iPP7Vt0-8uqWRM6Ek9NvF3x85DZBuvt26zT2tq1LoFOhBx302lN-Xg7376D6Ub9rxgTL0SsjMkgeihESleQaweSSVLFaogWt-Axo6xEhFAWFcQMYOHl_AKxcNiU:1w0JcY:Jhb14hlupxTtELF7eHj6fSi-st4HjJ2WjiOTenbGp5Y",
-    "expire_date": "2026-03-25T13:29:06.686Z"
+    "session_data": ".eJxVjDsOwjAQBe_iGlmO4_WHkj5nsDbeNQ4gR4qTCnF3EikFtG9m3ltE3NYSt8ZLnEhcRefE5XccMT25HoQeWO-zTHNdl2mUhyJP2uQwE79up_t3ULCVvfZ9UNpzZgDShhNCcJlTQOMtgNZecQZi66wz6BQwWR_Iql12qu-U-HwBAqI3Zw:1wRGjp:p9Pq4OelD8ly7vP_zOCRp2BQA8SaS9o-KsnE32Wh0M8",
+    "expire_date": "2026-06-07T21:52:01.243Z"
   }
 },
 {
   "model": "sessions.session",
-  "pk": "8alu78168zr27ux52ezl86uz71luwixa",
+  "pk": "6eli9ioqcs0okdo39ovf3a9lcgltwels",
   "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGlmO4_WHkj5nsDbeNQ4gR4qTCnF3EikFtG9m3ltE3NYSt8ZLnEhcRefE5XccMT25HoQeWO-zTHNdl2mUhyJP2uQwE79up_t3ULCVvfZ9UNpzZgDShhNCcJlTQOMtgNZecQZi66wz6BQwWR_Iql12qu-U-HwBAqI3Zw:1wREfx:FiNGsLbd6JpqrLs7_8QNSajlR0nkgwk_ObXud4vvcEg",
-    "expire_date": "2026-06-07T19:39:53.480Z"
+    "session_data": ".eJxVjLsOAiEURP-F2hDg8rhY2vsNhKesGkiW3cr470qyhU4558y8iPP7Vt0-8uqWRM6Ek9NvF3x85DZBuvt26zT2tq1LoFOhBx302lN-Xg7376D6Ub9rxgTL0SsjMkgeihESleQaweSSVLFaogWt-Axo6xEhFAWFcQMYOHl_AKxcNiU:1w0JcY:Jhb14hlupxTtELF7eHj6fSi-st4HjJ2WjiOTenbGp5Y",
+    "expire_date": "2026-03-25T13:29:06.686Z"
   }
 },
 {
@@ -892,7 +892,7 @@
     "user": 18,
     "bio": "UEFA certified football coach with 10 years experience training youth and adult players.",
     "specialties": "Football Strength Conditioning",
-    "photo": ""
+    "photo": "trainers/OIP.jpeg"
   }
 },
 {
@@ -1324,29 +1324,20 @@
 },
 {
   "model": "bookings.membershipplan",
-  "pk": 1,
-  "fields": {
-    "name": "Basic",
-    "monthly_price": "180.00",
-    "monthly_credits": 4
-  }
-},
-{
-  "model": "bookings.membershipplan",
-  "pk": 2,
-  "fields": {
-    "name": "plus",
-    "monthly_price": "360.00",
-    "monthly_credits": 12
-  }
-},
-{
-  "model": "bookings.membershipplan",
   "pk": 4,
   "fields": {
     "name": "Plus",
     "monthly_price": "399.00",
     "monthly_credits": 8
+  }
+},
+{
+  "model": "bookings.membershipplan",
+  "pk": 5,
+  "fields": {
+    "name": "Basic",
+    "monthly_price": "199.00",
+    "monthly_credits": 4
   }
 },
 {
@@ -1358,18 +1349,6 @@
     "start_date": "2026-05-01",
     "end_date": "2026-06-01",
     "remaining_credits": 6,
-    "is_active": true
-  }
-},
-{
-  "model": "bookings.membership",
-  "pk": 7,
-  "fields": {
-    "user": 21,
-    "plan": 1,
-    "start_date": "2026-05-01",
-    "end_date": "2026-06-01",
-    "remaining_credits": 2,
     "is_active": true
   }
 }

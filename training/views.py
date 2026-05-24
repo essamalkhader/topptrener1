@@ -94,6 +94,21 @@ def create_session(request):
         if form.is_valid():
             session = form.save(commit=False)
             session.trainer = trainer
+            
+            # Check for time conflict
+            start = session.start_datetime
+            from datetime import timedelta
+            end = start + timedelta(minutes=session.duration_minutes) if session.duration_minutes else start + timedelta(hours=1)
+
+            conflict = Session.objects.filter(
+                trainer=trainer,
+                status="scheduled",
+                start_datetime__lt=end,
+                start_datetime__gte=start - timedelta(minutes=session.duration_minutes or 60)).exists()
+
+            if conflict:
+                messages.warning(request, "You already have a session scheduled at this time. Please choose a different date or time.")
+                return render(request, "training/create_session.html", {"form": form})
 
             # Handle location
             location_name = form.cleaned_data["location_name"]
