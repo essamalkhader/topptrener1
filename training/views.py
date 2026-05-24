@@ -18,8 +18,41 @@ def session_list(request):
         start_datetime__gt=timezone.now(),
         status="scheduled"
     ).order_by("start_datetime")
-    return render(request, "training/session_list.html", {"sessions": sessions})
 
+    # Get filter parameters
+    search = request.GET.get("search", "")
+    sport = request.GET.get("sport", "")
+    level = request.GET.get("level", "")
+    free_only = request.GET.get("free_only", "")
+
+    # Apply filters
+    if search:
+        sessions = sessions.filter(title__icontains=search)
+    if sport:
+        sessions = sessions.filter(sport_type__id=sport)
+    if level:
+        sessions = sessions.filter(level=level)
+    if free_only:
+        sessions = sessions.filter(price_per_person=0)
+
+    # Get all sport types for the dropdown
+    sport_types = SportType.objects.all().order_by("name")
+
+    levels = [
+        ("beginner", "Beginner"),
+        ("intermediate", "Intermediate"),
+        ("advanced", "Advanced"),
+    ]
+
+    return render(request, "training/session_list.html", {
+        "sessions": sessions,
+        "sport_types": sport_types,
+        "levels": levels,
+        "search": search,
+        "selected_sport": sport,
+        "selected_level": level,
+        "free_only": free_only,
+    })
 
 def session_detail(request, session_id):
     session = get_object_or_404(Session, id=session_id)

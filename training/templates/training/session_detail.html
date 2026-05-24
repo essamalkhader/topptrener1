@@ -105,7 +105,10 @@
                         </div>
                         <div>
                             <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Session Type</p>
-                            <p class="text-sm font-semibold text-slate-800">{{ session.is_group|yesno:"Group Session,1-on-1 Session" }}</p>
+                            <a href="{% url 'trainer_profile' session.trainer.id %}"
+                                class="text-sm font-semibold text-primary hover:underline">
+                                {{ session.trainer.user.get_full_name|default:session.trainer.user.username }}
+                            </a>
                             <p class="text-xs text-slate-500">Capacity: {{ session.capacity }} people</p>
                         </div>
                     </div>

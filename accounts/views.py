@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login
@@ -64,3 +64,27 @@ def profile(request):
             "is_trainer": False,
             "profile": user_profile,
         })
+        
+def trainer_public_profile(request, trainer_id):
+    trainer = get_object_or_404(TrainerProfile, id=trainer_id)
+    from training.models import Session
+    from django.utils import timezone
+
+    upcoming_sessions = Session.objects.filter(
+        trainer=trainer,
+        start_datetime__gt=timezone.now(),
+        status="scheduled"
+    ).order_by("start_datetime")
+
+    from bookings.models import Review
+    reviews = Review.objects.filter(
+        trainer=trainer
+    ).select_related("user").order_by("-created_at")
+
+    return render(request, "accounts/trainer_profile.html", {
+        "trainer": trainer,
+        "upcoming_sessions": upcoming_sessions,
+        "reviews": reviews,
+        "avg_rating": trainer.average_rating(),
+        "review_count": trainer.review_count(),
+    })

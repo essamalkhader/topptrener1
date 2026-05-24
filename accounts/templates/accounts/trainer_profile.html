@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}{{ trainer.user.get_full_name|default:trainer.user.username }} - ToppTrener{% endblock %}
+
+{% block content %}
+
+<!-- HEADER -->
+<section class="bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <a href="/sessions/" class="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-primary transition-colors mb-6">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            Back to Sessions
+        </a>
+
+        <div class="flex flex-col sm:flex-row items-start gap-6">
+
+            <!-- Photo -->
+            {% if trainer.photo %}
+            <img src="{{ trainer.photo.url }}" alt="{{ trainer.user.username }}"
+                 class="h-28 w-28 rounded-full object-cover border-4 border-primary/20 shrink-0"/>
+            {% else %}
+            <div class="h-28 w-28 rounded-full bg-primary/10 flex items-center justify-center border-4 border-primary/20 shrink-0">
+                <span class="material-symbols-outlined text-5xl text-primary">person</span>
+            </div>
+            {% endif %}
+
+            <!-- Info -->
+            <div class="flex-1">
+                <div class="flex flex-wrap items-center gap-3 mb-2">
+                    <h1 class="text-3xl font-black text-slate-900">
+                        {{ trainer.user.get_full_name|default:trainer.user.username }}
+                    </h1>
+                    <span class="inline-flex items-center gap-1 text-xs font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                        <span class="material-symbols-outlined text-sm">verified</span>
+                        Certified Trainer
+                    </span>
+                </div>
+
+                <!-- Rating -->
+                {% if avg_rating %}
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="flex items-center gap-0.5">
+                        {% for i in "12345" %}
+                        <span class="text-xl {% if forloop.counter <= avg_rating %}text-amber-400{% else %}text-slate-200{% endif %}">&#9733;</span>
+                        {% endfor %}
+                    </div>
+                    <span class="text-sm font-bold text-slate-700">{{ avg_rating }}</span>
+                    <span class="text-sm text-slate-400">({{ review_count }} review{{ review_count|pluralize }})</span>
+                </div>
+                {% else %}
+                <p class="text-sm text-slate-400 mb-3">No reviews yet</p>
+                {% endif %}
+
+                {% if trainer.specialties %}
+                <div class="flex flex-wrap gap-2 mb-3">
+                    {% for specialty in trainer.specialties.split %}
+                    <span class="text-xs font-semibold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full">
+                        {{ specialty }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if trainer.bio %}
+                <p class="text-slate-600 text-sm leading-relaxed max-w-2xl">{{ trainer.bio }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <!-- LEFT: Upcoming Sessions -->
+        <div class="lg:col-span-2 space-y-6">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">event_upcoming</span>
+                Upcoming Sessions
+            </h2>
+
+            {% if upcoming_sessions %}
+            <div class="space-y-4">
+                {% for session in upcoming_sessions %}
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row gap-4">
+                    {% if session.photo %}
+                    <div class="w-full sm:w-32 h-24 rounded-lg overflow-hidden shrink-0">
+                        <img src="{{ session.photo.url }}" alt="{{ session.title }}"
+                             class="w-full h-full object-cover"/>
+                    </div>
+                    {% endif %}
+                    <div class="flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                                {{ session.sport_type.name }}
+                            </span>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full
+                                {% if session.level == 'beginner' %}bg-emerald-100 text-emerald-700
+                                {% elif session.level == 'intermediate' %}bg-amber-100 text-amber-700
+                                {% else %}bg-red-100 text-red-700{% endif %}">
+                                {{ session.get_level_display }}
+                            </span>
+                        </div>
+                        <h3 class="font-bold text-slate-900">{{ session.title }}</h3>
+                        <div class="flex flex-wrap gap-3 mt-2 text-xs text-slate-500">
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                {{ session.start_datetime|date:"d M Y • H:i" }}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">location_on</span>
+                                {{ session.location.name }}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">schedule</span>
+                                {{ session.duration_minutes }} min
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end justify-between gap-2 shrink-0">
+                        <div class="text-right">
+                            {% if session.price_per_person == 0 %}
+                            <span class="text-lg font-black text-emerald-600">Free</span>
+                            {% else %}
+                            <span class="text-lg font-black text-slate-900">{{ session.price_per_person }} NOK</span>
+                            {% endif %}
+                        </div>
+                        <a href="/sessions/{{ session.id }}/"
+                           class="px-4 py-2 rounded-lg bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors">
+                            View & Book
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="bg-white rounded-xl border border-slate-200 p-8 text-center">
+                <span class="material-symbols-outlined text-3xl text-slate-300">calendar_month</span>
+                <p class="text-slate-400 text-sm mt-2">No upcoming sessions from this trainer.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- RIGHT: Reviews -->
+        <div class="space-y-6">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <span class="material-symbols-outlined text-amber-400">star</span>
+                Reviews
+            </h2>
+
+            {% if reviews %}
+            <div class="space-y-4">
+                {% for review in reviews %}
+                <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                                {{ review.user.username|first|upper }}
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-900">{{ review.user.username }}</p>
+                                <p class="text-xs text-slate-400">{{ review.created_at|date:"d M Y" }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-0.5">
+                            {% for i in "12345" %}
+                            <span class="text-base {% if forloop.counter <= review.rating %}text-amber-400{% else %}text-slate-200{% endif %}">&#9733;</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if review.comment %}
+                    <p class="text-slate-600 text-sm">{{ review.comment }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="bg-white rounded-xl border border-slate-200 p-6 text-center">
+                <span class="material-symbols-outlined text-3xl text-slate-300">star</span>
+                <p class="text-slate-400 text-sm mt-2">No reviews yet.</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

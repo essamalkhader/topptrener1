@@ -5,117 +5,234 @@
 
 <!-- PAGE HEADER -->
 <section class="bg-white border-b border-slate-100">
-    <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="max-w-7xl mx-auto px-4 py-10">
         <h1 class="text-4xl font-black text-slate-900 tracking-tight">Available Sessions</h1>
         <p class="text-slate-500 mt-2 text-base">Browse and book professional training sessions in Oslo.</p>
     </div>
 </section>
 
-<!-- SESSIONS GRID -->
-<section class="max-w-6xl mx-auto px-4 py-12">
-    {% if sessions %}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for session in sessions %}
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+<!-- MAIN LAYOUT -->
+<div class="max-w-7xl mx-auto px-4 py-10 flex flex-col lg:flex-row gap-8">
 
-            
-            <!-- Session Photo or Color Bar -->
+    <!-- LEFT SIDEBAR: Filters -->
+    <aside class="w-full lg:w-72 shrink-0">
+        <form method="get" action="">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden sticky top-24">
+
+                <!-- Filter Header -->
+                <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                    <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-xl">tune</span>
+                        Filters
+                    </h2>
+                    {% if search or selected_sport or selected_level or free_only %}
+                    <a href="/sessions/" class="text-xs font-semibold text-primary hover:underline">
+                        Clear all
+                    </a>
+                    {% endif %}
+                </div>
+
+                <div class="p-6 space-y-6">
+
+                    <!-- Search -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Search</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-base">search</span>
+                            <input type="text" name="search" value="{{ search }}"
+                                placeholder="Search sessions..."
+                                class="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
+                        </div>
+                    </div>
+
+                    <!-- Sport Type -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Sport Type</label>
+                        <select name="sport"
+                            class="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all">
+                            <option value="">All Sports</option>
+                            {% for sport in sport_types %}
+                            <option value="{{ sport.id }}" {% if selected_sport == sport.id|stringformat:"s" %}selected{% endif %}>
+                                {{ sport.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Level -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Level</label>
+                        <div class="space-y-2">
+                            {% for value, label in levels %}
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="level" value="{{ value }}"
+                                    {% if selected_level == value %}checked{% endif %}
+                                    class="h-4 w-4 border-slate-300 text-primary focus:ring-primary"/>
+                                <span class="text-sm text-slate-700">{{ label }}</span>
+                            </label>
+                            {% endfor %}
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="level" value=""
+                                    {% if not selected_level %}checked{% endif %}
+                                    class="h-4 w-4 border-slate-300 text-primary focus:ring-primary"/>
+                                <span class="text-sm text-slate-700">All Levels</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700">Price</label>
+                        <label class="flex items-center gap-2 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-primary transition-colors">
+                            <input type="checkbox" name="free_only" value="1"
+                                {% if free_only %}checked{% endif %}
+                                class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"/>
+                            <span class="text-sm text-slate-700 font-medium">Free sessions only</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+                        Apply Filters
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </aside>
+
+    <!-- RIGHT: Sessions Grid -->
+    <main class="flex-1">
+
+        <!-- Results count -->
+        <div class="flex items-center justify-between mb-6">
+            <p class="text-sm text-slate-500">
+                <span class="font-bold text-slate-900">{{ sessions|length }}</span>
+                session{{ sessions|length|pluralize }} found
+            </p>
+        </div>
+
+        {% if sessions %}
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {% for session in sessions %}
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+
+                <!-- Session Photo or Color Bar -->
                 {% if session.photo %}
                 <div class="h-48 overflow-hidden">
                     <img src="{{ session.photo.url }}" alt="{{ session.title }}"
-                        class="w-full h-full object-cover"/>
+                         class="w-full h-full object-cover"/>
                 </div>
                 {% else %}
                 <div class="h-2 bg-primary"></div>
                 {% endif %}
 
-            <div class="p-6 flex flex-col gap-4 flex-1">
+                <div class="p-6 flex flex-col gap-4 flex-1">
 
-                <!-- Level Badge + Sport -->
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
-                        {{ session.sport_type.name }}
-                    </span>
-                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full
-                        {% if session.level == 'beginner' %}bg-emerald-100 text-emerald-700
-                        {% elif session.level == 'intermediate' %}bg-amber-100 text-amber-700
-                        {% else %}bg-red-100 text-red-700{% endif %}">
-                        {{ session.get_level_display }}
-                    </span>
-                </div>
-
-                <!-- Title  Description -->
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">{{ session.title }}</h3>
-                    {% if session.description %}
-                    <p class="text-slate-500 text-sm mt-1 line-clamp-2">{{ session.description }}</p>
-                    {% endif %}
-                </div>
-
-                <!-- Details -->
-                <div class="space-y-2">
-                    <div class="flex items-center gap-2 text-sm text-slate-600">
-                        <span class="material-symbols-outlined text-base text-slate-400">person</span>
-                        {{ session.trainer.user.get_full_name|default:session.trainer.user.username }}
+                    <!-- Level Badge + Sport -->
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                            {{ session.sport_type.name }}
+                        </span>
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                            {% if session.level == 'beginner' %}bg-emerald-100 text-emerald-700
+                            {% elif session.level == 'intermediate' %}bg-amber-100 text-amber-700
+                            {% else %}bg-red-100 text-red-700{% endif %}">
+                            {{ session.get_level_display }}
+                        </span>
                     </div>
-                    <div class="flex items-center gap-2 text-sm text-slate-600">
-                        <span class="material-symbols-outlined text-base text-slate-400">location_on</span>
-                        {{ session.location.name }}
-                    </div>
-                    <div class="flex items-center gap-2 text-sm text-slate-600">
-                        <span class="material-symbols-outlined text-base text-slate-400">calendar_today</span>
-                        {{ session.start_datetime|date:"D, d M Y • H:i" }}
-                    </div>
-                    <div class="flex items-center gap-2 text-sm text-slate-600">
-                        <span class="material-symbols-outlined text-base text-slate-400">schedule</span>
-                        {{ session.duration_minutes }} minutes
-                    </div>
-                </div>
 
-                <!-- Trainer Rating -->
-                {% with avg=session.trainer.average_rating %}
-                {% if avg %}
-                <div class="flex items-center gap-1">
-                    {% for i in "12345" %}
-                    <span class="text-sm {% if forloop.counter <= avg %}text-amber-400{% else %}text-slate-200{% endif %}">&#9733;</span>
-                    {% endfor %}
-                    <span class="text-xs font-semibold text-slate-600 ml-1">{{ avg }} ({{ session.trainer.review_count }} review{{ session.trainer.review_count|pluralize }})</span>
-                </div>
-                {% else %}
-                <div class="flex items-center gap-1">
-                    <span class="text-xs text-slate-400">No reviews yet</span>
-                </div>
-                {% endif %}
-                {% endwith %}
-
-                <!-- Footer: Price + Button -->
-                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <!-- Title & Description -->
                     <div>
-                        <span class="text-xl font-black text-slate-900">{{ session.price_per_person }} NOK</span>
-                        <span class="text-xs text-slate-400 block">per person</span>
+                        <h3 class="text-lg font-bold text-slate-900 leading-snug">{{ session.title }}</h3>
+                        {% if session.description %}
+                        <p class="text-slate-500 text-sm mt-1 line-clamp-2">{{ session.description }}</p>
+                        {% endif %}
                     </div>
-                    <a href="/sessions/{{ session.id }}/"
-                    class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
-                        View Details
-                    </a>
+
+                    <!-- Details -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">person</span>
+                            <a href="{% url 'trainer_profile' session.trainer.id %}" class="hover:text-primary hover:underline transition-colors">
+                                {{ session.trainer.user.get_full_name|default:session.trainer.user.username }}
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                            {{ session.location.name }}
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">calendar_today</span>
+                            {{ session.start_datetime|date:"D, d M Y • H:i" }}
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600">
+                            <span class="material-symbols-outlined text-base text-slate-400">schedule</span>
+                            {{ session.duration_minutes }} minutes
+                        </div>
+                    </div>
+
+                    <!-- Trainer Rating -->
+                    {% with avg=session.trainer.average_rating %}
+                    {% if avg %}
+                    <div class="flex items-center gap-1">
+                        {% for i in "12345" %}
+                        <span class="text-sm {% if forloop.counter <= avg %}text-amber-400{% else %}text-slate-200{% endif %}">&#9733;</span>
+                        {% endfor %}
+                        <span class="text-xs font-semibold text-slate-600 ml-1">{{ avg }} ({{ session.trainer.review_count }} review{{ session.trainer.review_count|pluralize }})</span>
+                    </div>
+                    {% else %}
+                    <div class="flex items-center gap-1">
+                        <span class="text-xs text-slate-400">No reviews yet</span>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+
+                    <!-- Footer: Price + Button -->
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            {% if session.price_per_person == 0 %}
+                            <span class="text-xl font-black text-emerald-600">Free</span>
+                            {% else %}
+                            <span class="text-xl font-black text-slate-900">{{ session.price_per_person }} NOK</span>
+                            <span class="text-xs text-slate-400 block">per person</span>
+                            {% endif %}
+                        </div>
+                        <a href="/sessions/{{ session.id }}/"
+                           class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
+                            View Details
+                        </a>
+                    </div>
+
                 </div>
-
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
-    {% else %}
-    <!-- Empty State -->
-    <div class="flex flex-col items-center justify-center py-24 gap-4 text-center">
-        <div class="h-16 w-16 rounded-full bg-slate-100 flex items-center justify-center">
-            <span class="material-symbols-outlined text-3xl text-slate-400">calendar_month</span>
+        {% else %}
+        <!-- Empty State -->
+        <div class="flex flex-col items-center justify-center py-24 gap-4 text-center">
+            <div class="h-16 w-16 rounded-full bg-slate-100 flex items-center justify-center">
+                <span class="material-symbols-outlined text-3xl text-slate-400">search_off</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">No sessions found</h3>
+            <p class="text-slate-500 text-sm max-w-sm">
+                {% if search or selected_sport or selected_level or free_only %}
+                No sessions match your filters. Try adjusting your search.
+                {% else %}
+                Check back soon — new training sessions are added regularly.
+                {% endif %}
+            </p>
+            {% if search or selected_sport or selected_level or free_only %}
+            <a href="/sessions/" class="px-5 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
+                Clear Filters
+            </a>
+            {% endif %}
         </div>
-        <h3 class="text-xl font-bold text-slate-900">No sessions available</h3>
-        <p class="text-slate-500 text-sm max-w-sm">Check back soon — new training sessions are added regularly.</p>
-    </div>
-    {% endif %}
+        {% endif %}
 
-</section>
+    </main>
+</div>
 
 {% endblock %}
