@@ -8,7 +8,11 @@
     <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
             <h1 class="text-3xl font-black text-slate-900 tracking-tight">
-                Welcome back, {{ request.user.get_full_name|default:request.user.username }}!
+                {% if is_new_user %}
+                    Welcome, {{ request.user.get_full_name|default:request.user.username }}!
+                {% else %}
+                    Welcome back, {{ request.user.get_full_name|default:request.user.username }}!
+                {% endif %}
             </h1>
             <p class="text-slate-500 mt-1 text-sm">Manage your training sessions and track your progress.</p>
         </div>

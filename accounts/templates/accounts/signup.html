@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Sign Up - ToppTrener{% endblock %}
 
 {% block content %}
@@ -8,10 +9,8 @@
         <!-- Logo -->
         <div class="text-center mb-8">
             <div class="inline-flex items-center gap-2 mb-4">
-                <div class="bg-primary p-2 rounded-lg text-white">
-                    <span class="material-symbols-outlined block text-2xl">sports_soccer</span>
-                </div>
-                <span class="text-2xl font-bold tracking-tight">ToppTrener</span>
+                <img src="{% static 'images/logo.png' %}" alt="ToppTrener" class="h-16 w-auto"/>
+                
             </div>
             <h1 class="text-3xl font-black text-slate-900">Create your account</h1>
             <p class="text-slate-500 mt-1 text-sm">Join ToppTrener and start your fitness journey.</p>
@@ -27,7 +26,6 @@
                     <label class="block text-sm font-semibold text-slate-700">Username</label>
                     <input type="text" name="username" placeholder="Username" required
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
-                    <p class="text-xs text-slate-400">150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
                 </div>
 
                 <!-- Email -->

@@ -144,12 +144,15 @@ def my_bookings(request):
         session__start_datetime__gt=timezone.now()
     ).count()
 
+    is_new_user = total_sessions == 0
+
     return render(request, "bookings/my_bookings.html", {
         "bookings": bookings,
         "active_membership": active_membership,
         "now": timezone.now(),
         "total_sessions": total_sessions,
         "upcoming_count": upcoming_count,
+        "is_new_user": is_new_user,
     })
 
 

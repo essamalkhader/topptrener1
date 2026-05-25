@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
     <title>{% block title %}ToppTrener{% endblock %}</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -47,11 +49,8 @@
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
 
             <!-- Logo -->
-            <a href="/" class="flex items-center gap-2">
-                <div class="bg-primary p-1.5 rounded-lg text-white">
-                    <span class="material-symbols-outlined block text-2xl">sports_soccer</span>
-                </div>
-                <span class="text-xl font-bold tracking-tight">ToppTrener</span>
+            <a href="/" class="flex items-center">
+                <img src="{% static 'images/logo.png' %}" alt="ToppTrener" class="h-16 w-auto"/>
             </a>
 
             <!-- Nav Links -->
@@ -72,8 +71,7 @@
                     <a href="/sessions/" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Sessions</a>
                 {% endif %}
             </nav>
-            
-        
+
             <!-- Auth -->
             <div class="flex items-center gap-3">
                 {% if user.is_authenticated %}
@@ -122,13 +120,10 @@
     <!-- FOOTER -->
     <footer class="border-t border-slate-200 bg-white py-6 mt-10">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <div class="bg-primary p-1 rounded-lg text-white">
-                    <span class="material-symbols-outlined text-sm block">sports_soccer</span>
-                </div>
-                <span class="font-bold text-slate-900">ToppTrener</span>
-            </div>
-            <p class="text-sm text-slate-400">© 2024 ToppTrener. All rights reserved.</p>
+            <a href="/" class="flex items-center">
+                <img src="{% static 'images/logo.png' %}" alt="ToppTrener" class="h-6 w-auto"/>
+            </a>
+            <p class="text-sm text-slate-400">© 2026 ToppTrener. All rights reserved.</p>
         </div>
     </footer>
 
