@@ -42,11 +42,17 @@
             <!-- Sport Type -->
             <div class="space-y-1.5">
                 <label class="block text-sm font-semibold text-slate-700">Sport Type</label>
-                <input type="text" name="sport_name" placeholder="e.g. Football, Yoga, Padel, Boxing" required
+                <input type="text" name="sport_name" placeholder="e.g. Football, Yoga, Padel" required
+                    list="sport_suggestions"
                     class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"/>
-                <p class="text-xs text-slate-400">Type the sport name — it will be created automatically if new.</p>
+                <datalist id="sport_suggestions">
+                    {% for sport in sport_types %}
+                    <option value="{{ sport.name }}">
+                    {% endfor %}
+                </datalist>
+                <p class="text-xs text-slate-400">Choose from existing sports or type a new one.</p>
             </div>
-
+            
             <!-- Level -->
             <div class="space-y-1.5">
                 <label class="block text-sm font-semibold text-slate-700">Level</label>

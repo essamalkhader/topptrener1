@@ -108,7 +108,11 @@ def create_session(request):
 
             if conflict:
                 messages.warning(request, "You already have a session scheduled at this time. Please choose a different date or time.")
-                return render(request, "training/create_session.html", {"form": form})
+                sport_types = SportType.objects.all().order_by("name")
+                return render(request, "training/create_session.html", {
+                    "form": form,
+                    "sport_types": sport_types,
+                })
 
             # Handle location
             location_name = form.cleaned_data["location_name"]
@@ -199,9 +203,11 @@ def edit_session(request, session_id):
             "sport_name": session.sport_type.name,
         })
 
+    sport_types = SportType.objects.all().order_by("name")
     return render(request, "training/edit_session.html", {
         "form": form,
         "session": session,
+        "sport_types": sport_types,
     })
 
 
