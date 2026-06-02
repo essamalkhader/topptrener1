@@ -26,7 +26,7 @@ ToppTrener connects professional sports trainers with athletes and fitness enthu
 ## Sample Credentials
 | Username | Password | Role |
 |----------|----------|------|
-| admin | admin1234 | Administrator |
+| admin | admin123 | Administrator |
 | erik | trainer123 | Trainer |
 | sarah | trainer123 | Trainer |
 | alex | trainee123 | Trainee (Plus membership) |
