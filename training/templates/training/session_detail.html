@@ -177,10 +177,16 @@
                                 Go to My Dashboard
                             </a>
                         {% else %}
-                            <a href="{% url 'create_booking' session.id %}"
-                               class="w-full block text-center px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-                                Book This Session
-                            </a>
+                            {% if session.status == 'scheduled' %}
+                                <a href="{% url 'create_booking' session.id %}"
+                                class="w-full block text-center px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                                    Book This Session
+                                </a>
+                            {% else %}
+                                <div class="w-full text-center px-6 py-3 rounded-lg bg-slate-100 text-slate-500 text-sm font-semibold">
+                                    Session Unavailable
+                                </div>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         <a href="{% url 'login' %}"

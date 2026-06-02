@@ -33,11 +33,15 @@ def create_booking(request, session_id):
         messages.warning(request, "Trainers cannot book sessions.")
         return redirect("session_detail", session_id=session.id)
 
-    # Block overbooking
-    confirmed_bookings = Booking.objects.filter(
+    # Block overbooking and count total seats 
+    from django.db.models import Sum
+    confirmed_seats = Booking.objects.filter(
         session=session
-    ).exclude(status="cancelled").count()
-    if confirmed_bookings >= session.capacity:
+    ).exclude(status="cancelled").aggregate(
+        total=Sum('seats')
+    )['total'] or 0
+
+    if confirmed_seats >= session.capacity:
         messages.warning(request, "Sorry, this session is fully booked.")
         return redirect("session_detail", session_id=session.id)
 
@@ -71,8 +75,8 @@ def create_booking(request, session_id):
                 messages.success(request, f"Booking confirmed using {booking.seats} credit(s).")
                 return redirect("my_bookings")
 
-            # NO CREDITS OR NO MEMBERSHIP > go to payment
-            return redirect("payment", session_id=session.id)
+            # NO CREDITS OR NO MEMBERSHIP — go to payment
+            return redirect(f"/sessions/{session.id}/payment/?seats={booking.seats}")
 
     else:
         form = BookingForm()
@@ -100,7 +104,7 @@ def payment(request, session_id):
         ).exists()
         can_upgrade = higher_plans
 
-    seats = 1
+    seats = int(request.GET.get('seats', 1))
     total = session.price_per_person * seats
 
     if request.method == "POST":

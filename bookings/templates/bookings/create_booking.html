@@ -67,11 +67,15 @@
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 space-y-2">
                         <div class="flex justify-between text-sm text-slate-500">
                             <span>Price per session</span>
-                            <span>{{ session.price_per_person }} NOK</span>
+                            <span id="price-per-seat">{{ session.price_per_person }} NOK</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-slate-500">
+                            <span>Seats</span>
+                            <span id="seats-display">1</span>
                         </div>
                         <div class="flex justify-between text-lg font-bold text-slate-900 pt-2 border-t border-slate-200">
                             <span>Total Price</span>
-                            <span>{{ session.price_per_person }} NOK</span>
+                            <span id="total-price">{{ session.price_per_person }} NOK</span>
                         </div>
                     </div>
                 </div>
@@ -107,4 +111,22 @@
 
     </div>
 </div>
+<script>
+    const pricePerSeat = {{ session.price_per_person }};
+    const seatsInput = document.querySelector('input[name="seats"]');
+    const totalPrice = document.getElementById('total-price');
+    const seatsDisplay = document.getElementById('seats-display');
+
+    function updateTotal() {
+        const seats = parseInt(seatsInput.value) || 1;
+        seatsDisplay.textContent = seats;
+        totalPrice.textContent = (pricePerSeat * seats).toFixed(2) + ' NOK';
+    }
+
+    if (seatsInput) {
+        seatsInput.addEventListener('change', updateTotal);
+        seatsInput.addEventListener('input', updateTotal);
+        updateTotal();
+    }
+</script>
 {% endblock %}
