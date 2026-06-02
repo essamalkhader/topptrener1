@@ -622,7 +622,7 @@
   "pk": 17,
   "fields": {
     "password": "pbkdf2_sha256$1200000$oOuXtarHvoUDA4DiXrUyUV$PKAxQqFHXOa1ZUZPP+oaXf+BV8ll1SG+QBv7tC0B9qQ=",
-    "last_login": "2026-05-24T21:52:01.234Z",
+    "last_login": "2026-06-01T23:02:47.821Z",
     "is_superuser": true,
     "username": "Admin",
     "first_name": "",
@@ -640,7 +640,7 @@
   "pk": 18,
   "fields": {
     "password": "pbkdf2_sha256$1200000$8aUdjuEDFu8FtaNIZ0DDM6$uLLxkNB14US4o7ljJPDFTv/0miu7Fbuv6ZTScxOcVdE=",
-    "last_login": "2026-05-24T21:38:37.721Z",
+    "last_login": "2026-06-02T01:03:37.887Z",
     "is_superuser": false,
     "username": "erik",
     "first_name": "Erik",
@@ -658,7 +658,7 @@
   "pk": 19,
   "fields": {
     "password": "pbkdf2_sha256$1200000$RkFfIcWBIOyD2IuC8wlhhK$875UMBYsj5qj1kBVOK29oPbPqiw0ryZF/EeUULe+AWg=",
-    "last_login": null,
+    "last_login": "2026-05-24T22:34:14.050Z",
     "is_superuser": false,
     "username": "sarah",
     "first_name": "Sarah",
@@ -676,7 +676,7 @@
   "pk": 20,
   "fields": {
     "password": "pbkdf2_sha256$1200000$Rp5RH9jWO2IRpalt38TXa8$r0Qa4HFOWayEqGs49Z76VhKjNz+oQvXndF1d1L7ICCg=",
-    "last_login": null,
+    "last_login": "2026-06-02T01:04:09.354Z",
     "is_superuser": false,
     "username": "alex",
     "first_name": "Alex",
@@ -712,7 +712,7 @@
   "pk": 22,
   "fields": {
     "password": "pbkdf2_sha256$1200000$IcsrDUYuPlcZAhdsQqbstf$JFC0rEViz/X/Y6+kO32hjj+PeYF3H+PJiqMdY1lC4zo=",
-    "last_login": null,
+    "last_login": "2026-06-02T01:05:41.939Z",
     "is_superuser": false,
     "username": "lucas",
     "first_name": "Lucas",
@@ -721,6 +721,60 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2026-05-24T19:53:23.028Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$Q0QWzH1bvrZu7Ms2RZlzwD$gdg+hgVWivGaFqKE+7deKgUVk9Erq07tm8J59ztz11c=",
+    "last_login": "2026-05-25T11:53:56.501Z",
+    "is_superuser": false,
+    "username": "Esam",
+    "first_name": "",
+    "last_name": "",
+    "email": "essamalk@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-25T10:44:09.049Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 24,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$WmhW6Kkv4JkJoFSgSoM7lO$JjaSyJ7K42S+f04ry0vE+SjX5iJyzuCNEB4MCHELuOQ=",
+    "last_login": "2026-05-28T10:28:24.284Z",
+    "is_superuser": false,
+    "username": "ali",
+    "first_name": "",
+    "last_name": "",
+    "email": "ali@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-28T10:28:11.704Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 25,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$6aAs5SxJHnQMBWcLbst3yQ$Ls3DqW6wYeWAHksV7myIzIiB6IfubeBuPSTDsYQgs3g=",
+    "last_login": "2026-05-28T10:50:48.373Z",
+    "is_superuser": false,
+    "username": "Ahmad",
+    "first_name": "",
+    "last_name": "",
+    "email": "ahmad@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-28T10:50:23.927Z",
     "groups": [],
     "user_permissions": []
   }
@@ -855,18 +909,18 @@
 },
 {
   "model": "sessions.session",
-  "pk": "623m2owdvl7p0bn1hk2y05zqhswz5qec",
-  "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGlmO4_WHkj5nsDbeNQ4gR4qTCnF3EikFtG9m3ltE3NYSt8ZLnEhcRefE5XccMT25HoQeWO-zTHNdl2mUhyJP2uQwE79up_t3ULCVvfZ9UNpzZgDShhNCcJlTQOMtgNZecQZi66wz6BQwWR_Iql12qu-U-HwBAqI3Zw:1wRGjp:p9Pq4OelD8ly7vP_zOCRp2BQA8SaS9o-KsnE32Wh0M8",
-    "expire_date": "2026-06-07T21:52:01.243Z"
-  }
-},
-{
-  "model": "sessions.session",
   "pk": "6eli9ioqcs0okdo39ovf3a9lcgltwels",
   "fields": {
     "session_data": ".eJxVjLsOAiEURP-F2hDg8rhY2vsNhKesGkiW3cr470qyhU4558y8iPP7Vt0-8uqWRM6Ek9NvF3x85DZBuvt26zT2tq1LoFOhBx302lN-Xg7376D6Ub9rxgTL0SsjMkgeihESleQaweSSVLFaogWt-Axo6xEhFAWFcQMYOHl_AKxcNiU:1w0JcY:Jhb14hlupxTtELF7eHj6fSi-st4HjJ2WjiOTenbGp5Y",
     "expire_date": "2026-03-25T13:29:06.686Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dq52dbqhsuk7dwncb6aoq8ivy61u984u",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGln2Bn9CSc8ZrN31BgdQIsVJhbg7jpQCqpHmvZm3SritJW1VljRmdVEA6vRbEvJTpp3kB073WfM8rctIelf0Qau-zVle18P9OyhYS1sLIcUYWFzG4M6mZwNgGHz0FG3orO3IgNjecIfss3NxGASaSUIt1ecLBNQ38A:1wUDZd:fwZk2HNeLk68Ay1x7S55BHTVrKmbhqr7fPffQbSA7XA",
+    "expire_date": "2026-06-16T01:05:41.948Z"
   }
 },
 {
@@ -906,6 +960,16 @@
   }
 },
 {
+  "model": "accounts.trainerprofile",
+  "pk": 7,
+  "fields": {
+    "user": 24,
+    "bio": "",
+    "specialties": "",
+    "photo": ""
+  }
+},
+{
   "model": "accounts.userprofile",
   "pk": 6,
   "fields": {
@@ -937,6 +1001,24 @@
   "pk": 9,
   "fields": {
     "user": 22,
+    "photo": "",
+    "bio": ""
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 10,
+  "fields": {
+    "user": 23,
+    "photo": "",
+    "bio": ""
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 11,
+  "fields": {
+    "user": 25,
     "photo": "",
     "bio": ""
   }
@@ -1115,13 +1197,13 @@
     "title": "Beginner Football Techniques",
     "description": "Learn the fundamentals of football including passing, dribbling, and basic tactics. Perfect for beginners looking to develop their skills.",
     "level": "beginner",
-    "start_datetime": "2026-06-05T08:00:00Z",
-    "duration_minutes": 90,
+    "start_datetime": "2026-06-01T22:02:00Z",
+    "duration_minutes": 15,
     "capacity": 12,
     "price_per_person": "250.00",
     "is_group": true,
     "status": "scheduled",
-    "photo": ""
+    "photo": "sessions/OIP_1.jpeg"
   }
 },
 {
@@ -1139,8 +1221,8 @@
     "capacity": 10,
     "price_per_person": "300.00",
     "is_group": true,
-    "status": "scheduled",
-    "photo": ""
+    "status": "cancelled",
+    "photo": "sessions/OIP_2_yRCI8IH.jpeg"
   }
 },
 {
@@ -1158,8 +1240,8 @@
     "capacity": 1,
     "price_per_person": "450.00",
     "is_group": false,
-    "status": "scheduled",
-    "photo": ""
+    "status": "cancelled",
+    "photo": "sessions/OIP_3.jpeg"
   }
 },
 {
@@ -1178,7 +1260,7 @@
     "price_per_person": "150.00",
     "is_group": true,
     "status": "scheduled",
-    "photo": ""
+    "photo": "sessions/OIP_6.jpeg"
   }
 },
 {
@@ -1197,7 +1279,7 @@
     "price_per_person": "150.00",
     "is_group": true,
     "status": "scheduled",
-    "photo": ""
+    "photo": "sessions/OIP_7.jpeg"
   }
 },
 {
@@ -1216,7 +1298,7 @@
     "price_per_person": "350.00",
     "is_group": true,
     "status": "scheduled",
-    "photo": ""
+    "photo": "sessions/OIP_4.jpeg"
   }
 },
 {
@@ -1235,7 +1317,7 @@
     "price_per_person": "0.00",
     "is_group": true,
     "status": "scheduled",
-    "photo": ""
+    "photo": "sessions/OIP_8.jpeg"
   }
 },
 {
@@ -1254,7 +1336,7 @@
     "price_per_person": "200.00",
     "is_group": true,
     "status": "scheduled",
-    "photo": ""
+    "photo": "sessions/OIP_5.jpeg"
   }
 },
 {
@@ -1291,7 +1373,7 @@
     "session": 16,
     "seats": 1,
     "note_to_trainer": "",
-    "status": "confirmed",
+    "status": "cancelled",
     "used_credits": false,
     "created_at": "2026-05-24T20:03:30.876Z"
   }
@@ -1323,6 +1405,57 @@
   }
 },
 {
+  "model": "bookings.booking",
+  "pk": 25,
+  "fields": {
+    "user": 23,
+    "session": 13,
+    "seats": 1,
+    "note_to_trainer": "",
+    "status": "confirmed",
+    "used_credits": false,
+    "created_at": "2026-05-25T10:53:53.037Z"
+  }
+},
+{
+  "model": "bookings.booking",
+  "pk": 26,
+  "fields": {
+    "user": 25,
+    "session": 13,
+    "seats": 1,
+    "note_to_trainer": "",
+    "status": "cancelled",
+    "used_credits": true,
+    "created_at": "2026-05-28T10:53:59.739Z"
+  }
+},
+{
+  "model": "bookings.booking",
+  "pk": 27,
+  "fields": {
+    "user": 22,
+    "session": 16,
+    "seats": 1,
+    "note_to_trainer": "",
+    "status": "confirmed",
+    "used_credits": false,
+    "created_at": "2026-06-02T10:34:08.774Z"
+  }
+},
+{
+  "model": "bookings.review",
+  "pk": 4,
+  "fields": {
+    "booking": 20,
+    "trainer": 5,
+    "user": 20,
+    "rating": 5,
+    "comment": "it was realy so much fun",
+    "created_at": "2026-06-01T22:34:15.587Z"
+  }
+},
+{
   "model": "bookings.membershipplan",
   "pk": 4,
   "fields": {
@@ -1349,6 +1482,18 @@
     "start_date": "2026-05-01",
     "end_date": "2026-06-01",
     "remaining_credits": 6,
+    "is_active": true
+  }
+},
+{
+  "model": "bookings.membership",
+  "pk": 8,
+  "fields": {
+    "user": 25,
+    "plan": 4,
+    "start_date": "2026-05-28",
+    "end_date": "2026-06-27",
+    "remaining_credits": 8,
     "is_active": true
   }
 }
