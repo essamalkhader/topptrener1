@@ -1,0 +1,1539 @@
+[
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2026-05-24T19:40:28.858Z",
+        "user": 17,
+        "content_type": 7,
+        "object_id": "4",
+        "object_repr": "Joe",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2026-05-24T19:41:08.284Z",
+        "user": 17,
+        "content_type": 4,
+        "object_id": "12",
+        "object_repr": "Admin1",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2026-05-24T19:41:08.284Z",
+        "user": 17,
+        "content_type": 4,
+        "object_id": "13",
+        "object_repr": "Joe",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2026-05-24T19:41:08.284Z",
+        "user": 17,
+        "content_type": 4,
+        "object_id": "16",
+        "object_repr": "dyaia",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2026-05-24T19:41:08.284Z",
+        "user": 17,
+        "content_type": 4,
+        "object_id": "14",
+        "object_repr": "hao",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2026-05-24T19:41:08.284Z",
+        "user": 17,
+        "content_type": 4,
+        "object_id": "15",
+        "object_repr": "salah",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 3,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 3,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 3,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 3,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 2,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 2,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 2,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 2,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 4,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 5,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 6,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add trainer profile",
+        "content_type": 7,
+        "codename": "add_trainerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change trainer profile",
+        "content_type": 7,
+        "codename": "change_trainerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete trainer profile",
+        "content_type": 7,
+        "codename": "delete_trainerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view trainer profile",
+        "content_type": 7,
+        "codename": "view_trainerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 9,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 9,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 9,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 9,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add sport type",
+        "content_type": 10,
+        "codename": "add_sporttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change sport type",
+        "content_type": 10,
+        "codename": "change_sporttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete sport type",
+        "content_type": 10,
+        "codename": "delete_sporttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view sport type",
+        "content_type": 10,
+        "codename": "view_sporttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add location",
+        "content_type": 8,
+        "codename": "add_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change location",
+        "content_type": 8,
+        "codename": "change_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete location",
+        "content_type": 8,
+        "codename": "delete_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view location",
+        "content_type": 8,
+        "codename": "view_location"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add review",
+        "content_type": 14,
+        "codename": "add_review"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change review",
+        "content_type": 14,
+        "codename": "change_review"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete review",
+        "content_type": 14,
+        "codename": "delete_review"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view review",
+        "content_type": 14,
+        "codename": "view_review"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add membership plan",
+        "content_type": 13,
+        "codename": "add_membershipplan"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change membership plan",
+        "content_type": 13,
+        "codename": "change_membershipplan"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete membership plan",
+        "content_type": 13,
+        "codename": "delete_membershipplan"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view membership plan",
+        "content_type": 13,
+        "codename": "view_membershipplan"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add booking",
+        "content_type": 11,
+        "codename": "add_booking"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change booking",
+        "content_type": 11,
+        "codename": "change_booking"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete booking",
+        "content_type": 11,
+        "codename": "delete_booking"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can view booking",
+        "content_type": 11,
+        "codename": "view_booking"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+        "name": "Can add membership",
+        "content_type": 12,
+        "codename": "add_membership"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+        "name": "Can change membership",
+        "content_type": 12,
+        "codename": "change_membership"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+        "name": "Can delete membership",
+        "content_type": 12,
+        "codename": "delete_membership"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+        "name": "Can view membership",
+        "content_type": 12,
+        "codename": "view_membership"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+        "name": "Can add user profile",
+        "content_type": 15,
+        "codename": "add_userprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+        "name": "Can change user profile",
+        "content_type": 15,
+        "codename": "change_userprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+        "name": "Can delete user profile",
+        "content_type": 15,
+        "codename": "delete_userprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+        "name": "Can view user profile",
+        "content_type": 15,
+        "codename": "view_userprofile"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 17,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$oOuXtarHvoUDA4DiXrUyUV$PKAxQqFHXOa1ZUZPP+oaXf+BV8ll1SG+QBv7tC0B9qQ=",
+        "last_login": "2026-06-02T19:35:14.864Z",
+        "is_superuser": true,
+        "username": "Admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-05-24T19:39:13.359Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$8aUdjuEDFu8FtaNIZ0DDM6$uLLxkNB14US4o7ljJPDFTv/0miu7Fbuv6ZTScxOcVdE=",
+        "last_login": "2026-06-04T11:10:26.460Z",
+        "is_superuser": false,
+        "username": "erik",
+        "first_name": "Erik",
+        "last_name": "Hansen",
+        "email": "erik@topptrener.no",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-24T19:53:21.576Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 19,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$RkFfIcWBIOyD2IuC8wlhhK$875UMBYsj5qj1kBVOK29oPbPqiw0ryZF/EeUULe+AWg=",
+        "last_login": "2026-05-24T22:34:14.050Z",
+        "is_superuser": false,
+        "username": "sarah",
+        "first_name": "Sarah",
+        "last_name": "Wilson",
+        "email": "sarah@topptrener.no",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-24T19:53:21.940Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 20,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$Rp5RH9jWO2IRpalt38TXa8$r0Qa4HFOWayEqGs49Z76VhKjNz+oQvXndF1d1L7ICCg=",
+        "last_login": "2026-06-04T10:33:42.381Z",
+        "is_superuser": false,
+        "username": "alex",
+        "first_name": "Alex",
+        "last_name": "Johnson",
+        "email": "alex@email.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-24T19:53:22.308Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 21,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$xshTi4V78WVzjv1AiKTLGI$Ov33K/di5nQU5fPOa5gSCNrSviJQaWiQhHnM/uI03T8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "mia",
+        "first_name": "Mia",
+        "last_name": "Berg",
+        "email": "mia@email.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-24T19:53:22.686Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 22,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$IcsrDUYuPlcZAhdsQqbstf$JFC0rEViz/X/Y6+kO32hjj+PeYF3H+PJiqMdY1lC4zo=",
+        "last_login": "2026-06-04T11:15:07.917Z",
+        "is_superuser": false,
+        "username": "lucas",
+        "first_name": "Lucas",
+        "last_name": "Andersen",
+        "email": "lucas@email.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-24T19:53:23.028Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 23,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$Q0QWzH1bvrZu7Ms2RZlzwD$gdg+hgVWivGaFqKE+7deKgUVk9Erq07tm8J59ztz11c=",
+        "last_login": "2026-05-25T11:53:56.501Z",
+        "is_superuser": false,
+        "username": "Esam",
+        "first_name": "",
+        "last_name": "",
+        "email": "essamalk@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-25T10:44:09.049Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 24,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$WmhW6Kkv4JkJoFSgSoM7lO$JjaSyJ7K42S+f04ry0vE+SjX5iJyzuCNEB4MCHELuOQ=",
+        "last_login": "2026-05-28T10:28:24.284Z",
+        "is_superuser": false,
+        "username": "ali",
+        "first_name": "",
+        "last_name": "",
+        "email": "ali@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-28T10:28:11.704Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 25,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$6aAs5SxJHnQMBWcLbst3yQ$Ls3DqW6wYeWAHksV7myIzIiB6IfubeBuPSTDsYQgs3g=",
+        "last_login": "2026-05-28T10:50:48.373Z",
+        "is_superuser": false,
+        "username": "Ahmad",
+        "first_name": "",
+        "last_name": "",
+        "email": "ahmad@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-28T10:50:23.927Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "accounts",
+        "model": "trainerprofile"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "training",
+        "model": "location"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "training",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "training",
+        "model": "sporttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "bookings",
+        "model": "booking"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "bookings",
+        "model": "membership"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+        "app_label": "bookings",
+        "model": "membershipplan"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+        "app_label": "bookings",
+        "model": "review"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+        "app_label": "accounts",
+        "model": "userprofile"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "4zmoqnghfijlfb2uhbbcn0wmkg6ahi59",
+    "fields": {
+        "session_data": ".eJxVjE0OwiAYBe_C2hAoVMCl-56B8P0gVQNJaVfGu2uTLnT7Zua9REzbWuLWeYkziYuw4vS7QcIH1x3QPdVbk9jquswgd0UetMupET-vh_t3UFIv39p7rRkVAgbOnIENKCRwfiDmrHkAo5w2ZnQGA4GlQAyY7dlpFZwdxfsDIlI49w:1w2nzU:mMUuN4vIwLvIi5iTy1WsLqCehyvCAtMhKOaKIHPelAQ",
+        "expire_date": "2026-04-01T10:19:04.245Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "6eli9ioqcs0okdo39ovf3a9lcgltwels",
+    "fields": {
+        "session_data": ".eJxVjLsOAiEURP-F2hDg8rhY2vsNhKesGkiW3cr470qyhU4558y8iPP7Vt0-8uqWRM6Ek9NvF3x85DZBuvt26zT2tq1LoFOhBx302lN-Xg7376D6Ub9rxgTL0SsjMkgeihESleQaweSSVLFaogWt-Axo6xEhFAWFcQMYOHl_AKxcNiU:1w0JcY:Jhb14hlupxTtELF7eHj6fSi-st4HjJ2WjiOTenbGp5Y",
+        "expire_date": "2026-03-25T13:29:06.686Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "lq96hsparc7dvg2mw6j89kd9bll7f9dj",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGln2Bn9CSc8ZrN31BgdQIsVJhbg7jpQCqpHmvZm3SritJW1VljRmdVEA6vRbEvJTpp3kB073WfM8rctIelf0Qau-zVle18P9OyhYS1sLIcUYWFzG4M6mZwNgGHz0FG3orO3IgNjecIfss3NxGASaSUIt1ecLBNQ38A:1wV62V:slYnniZfkOkXrkmwViqgNpxQUsZI0EGPSkDOvnyPg9E",
+        "expire_date": "2026-06-18T11:15:07.930Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "r8vkcehb5z14br18j4svq9zimnp814c9",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAUBO_iGllxEn9CSc8ZLD_vMw4gW4qTCnF3iJQC2p2ZfQkftjX7rfHiZ4izGMXpd6MQH1x2gHsotypjLesyk9wVedAmrxX8vBzu30EOLX_rKaURZPToekeRNSskbQnkBgeNBDUkMynW1oaJFHfcc0QwDrAdBhLvDxDtOTs:1w9uOZ:YMjUES5_1ouP_E9TjWhoFheCOa0G0WRW0GyIoa8vez0",
+        "expire_date": "2026-04-21T00:34:19.989Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "webst4s8u6m93y81wpedebovfdjub4jg",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSHlMVBcuvcbyAwDUjU0Ke3K-O_apAvd3nPOfYmI21rj1vMSJxZnoUCcfkfC9MhtJ3zHdptlmtu6TCR3RR60y-vM-Xk53L-Dir1-a1QDgncEbIwGa1n7HEwgRIfEYQxpcKrgWJxhRtaaFYBWORRL1rMV7w8GlDgx:1wJr6m:Gx8C3BWQAydJfHpTfbnm0bQWvNycjOg1h2_Nq8I0hWA",
+        "expire_date": "2026-05-18T11:05:04.289Z"
+    }
+},
+{
+    "model": "accounts.trainerprofile",
+    "pk": 5,
+    "fields": {
+        "user": 18,
+        "bio": "UEFA certified football coach with 10 years experience training youth and adult players.",
+        "specialties": "Football Strength Conditioning",
+        "photo": "trainers/OIP.jpeg"
+    }
+},
+{
+    "model": "accounts.trainerprofile",
+    "pk": 6,
+    "fields": {
+        "user": 19,
+        "bio": "Certified yoga and wellness instructor specializing in recovery and flexibility for athletes.",
+        "specialties": "Yoga Wellness Recovery",
+        "photo": ""
+    }
+},
+{
+    "model": "accounts.trainerprofile",
+    "pk": 7,
+    "fields": {
+        "user": 24,
+        "bio": "",
+        "specialties": "",
+        "photo": ""
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 6,
+    "fields": {
+        "user": 17,
+        "photo": "",
+        "bio": ""
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 7,
+    "fields": {
+        "user": 20,
+        "photo": "",
+        "bio": ""
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 8,
+    "fields": {
+        "user": 21,
+        "photo": "",
+        "bio": ""
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 9,
+    "fields": {
+        "user": 22,
+        "photo": "",
+        "bio": ""
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 10,
+    "fields": {
+        "user": 23,
+        "photo": "",
+        "bio": ""
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 11,
+    "fields": {
+        "user": 25,
+        "photo": "",
+        "bio": ""
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 1,
+    "fields": {
+        "name": "Padel",
+        "slug": "padel"
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 2,
+    "fields": {
+        "name": "Yoga",
+        "slug": "yoga"
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 3,
+    "fields": {
+        "name": "Personal Training",
+        "slug": ""
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 4,
+    "fields": {
+        "name": "Football",
+        "slug": "football"
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 5,
+    "fields": {
+        "name": "sfgvsgs",
+        "slug": "sfgvsgs"
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 6,
+    "fields": {
+        "name": "mn hjbjknjb",
+        "slug": "mn-hjbjknjb"
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 7,
+    "fields": {
+        "name": "Strength & Conditioning",
+        "slug": "strength-conditioning"
+    }
+},
+{
+    "model": "training.sporttype",
+    "pk": 8,
+    "fields": {
+        "name": "Running",
+        "slug": "running"
+    }
+},
+{
+    "model": "training.location",
+    "pk": 1,
+    "fields": {
+        "name": "Frogner Park",
+        "address": "Frogner Parken",
+        "city": "Oslo",
+        "map_url": "https://goo.gl/maps/1qJ4J3cT2QjQJ2sD8"
+    }
+},
+{
+    "model": "training.location",
+    "pk": 2,
+    "fields": {
+        "name": "sognsvann",
+        "address": "sognsvann",
+        "city": "Oslo",
+        "map_url": "https://maps.app.goo.gl/8grQWGakgyFsiFLV7"
+    }
+},
+{
+    "model": "training.location",
+    "pk": 3,
+    "fields": {
+        "name": "domus",
+        "address": "atlitca domus",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 4,
+    "fields": {
+        "name": "kringsjo",
+        "address": "olav M. troviks vei 23",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 5,
+    "fields": {
+        "name": "dsfsdf",
+        "address": "sdfdsf",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 6,
+    "fields": {
+        "name": "n hbu",
+        "address": "nbygy",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 7,
+    "fields": {
+        "name": "Frogner Stadium",
+        "address": "Middelthuns gate 28",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 8,
+    "fields": {
+        "name": "Bislett Stadium",
+        "address": "Bislett gate 1",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 9,
+    "fields": {
+        "name": "SATS Majorstuen",
+        "address": "Bogstadveien 2",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.location",
+    "pk": 10,
+    "fields": {
+        "name": "Ekebergsletta",
+        "address": "Ekebergveien 100",
+        "city": "Oslo",
+        "map_url": ""
+    }
+},
+{
+    "model": "training.session",
+    "pk": 13,
+    "fields": {
+        "trainer": 5,
+        "sport_type": 4,
+        "location": 7,
+        "title": "Beginner Football Techniques",
+        "description": "Learn the fundamentals of football including passing, dribbling, and basic tactics. Perfect for beginners looking to develop their skills.",
+        "level": "beginner",
+        "start_datetime": "2026-06-01T22:02:00Z",
+        "duration_minutes": 15,
+        "capacity": 12,
+        "price_per_person": "250.00",
+        "is_group": true,
+        "status": "scheduled",
+        "photo": "sessions/OIP_1.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 14,
+    "fields": {
+        "trainer": 5,
+        "sport_type": 4,
+        "location": 7,
+        "title": "Advanced Football Drills",
+        "description": "Intensive training session focusing on advanced techniques, tactical awareness, and match preparation for experienced players.",
+        "level": "advanced",
+        "start_datetime": "2026-06-10T15:00:00Z",
+        "duration_minutes": 90,
+        "capacity": 10,
+        "price_per_person": "300.00",
+        "is_group": true,
+        "status": "cancelled",
+        "photo": "sessions/OIP_2_yRCI8IH.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 15,
+    "fields": {
+        "trainer": 5,
+        "sport_type": 4,
+        "location": 8,
+        "title": "1-on-1 Football Coaching",
+        "description": "Personalized football coaching tailored to your specific needs and goals.",
+        "level": "intermediate",
+        "start_datetime": "2026-06-15T12:00:00Z",
+        "duration_minutes": 60,
+        "capacity": 1,
+        "price_per_person": "450.00",
+        "is_group": false,
+        "status": "cancelled",
+        "photo": "sessions/OIP_3.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 16,
+    "fields": {
+        "trainer": 6,
+        "sport_type": 2,
+        "location": 9,
+        "title": "Morning Yoga for Athletes",
+        "description": "Energizing yoga designed for athletes. Improve flexibility, balance and mental focus.",
+        "level": "beginner",
+        "start_datetime": "2026-06-07T06:00:00Z",
+        "duration_minutes": 60,
+        "capacity": 15,
+        "price_per_person": "150.00",
+        "is_group": true,
+        "status": "scheduled",
+        "photo": "sessions/OIP_6.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 17,
+    "fields": {
+        "trainer": 6,
+        "sport_type": 2,
+        "location": 9,
+        "title": "Recovery Yoga and Stretching",
+        "description": "Deep stretching and recovery yoga to reduce muscle soreness and improve mobility.",
+        "level": "beginner",
+        "start_datetime": "2026-06-12T15:30:00Z",
+        "duration_minutes": 75,
+        "capacity": 12,
+        "price_per_person": "150.00",
+        "is_group": true,
+        "status": "scheduled",
+        "photo": "sessions/OIP_7.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 18,
+    "fields": {
+        "trainer": 5,
+        "sport_type": 7,
+        "location": 9,
+        "title": "Strength and Conditioning Bootcamp",
+        "description": "High intensity session combining weightlifting, plyometrics and cardio for maximum gains.",
+        "level": "intermediate",
+        "start_datetime": "2026-06-18T14:00:00Z",
+        "duration_minutes": 75,
+        "capacity": 8,
+        "price_per_person": "350.00",
+        "is_group": true,
+        "status": "scheduled",
+        "photo": "sessions/OIP_4.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 19,
+    "fields": {
+        "trainer": 6,
+        "sport_type": 8,
+        "location": 10,
+        "title": "Free Community Run",
+        "description": "Join us for a free community run around Ekebergsletta. All fitness levels welcome.",
+        "level": "beginner",
+        "start_datetime": "2026-06-08T07:00:00Z",
+        "duration_minutes": 60,
+        "capacity": 30,
+        "price_per_person": "0.00",
+        "is_group": true,
+        "status": "scheduled",
+        "photo": "sessions/OIP_8.jpeg"
+    }
+},
+{
+    "model": "training.session",
+    "pk": 20,
+    "fields": {
+        "trainer": 5,
+        "sport_type": 1,
+        "location": 10,
+        "title": "Padel for Beginners",
+        "description": "Learn the basics of padel tennis in this fun introductory session. Equipment provided.",
+        "level": "beginner",
+        "start_datetime": "2026-06-20T09:00:00Z",
+        "duration_minutes": 90,
+        "capacity": 6,
+        "price_per_person": "200.00",
+        "is_group": true,
+        "status": "scheduled",
+        "photo": "sessions/OIP_5.jpeg"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 20,
+    "fields": {
+        "user": 20,
+        "session": 13,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": true,
+        "created_at": "2026-05-24T20:03:30.852Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 21,
+    "fields": {
+        "user": 21,
+        "session": 13,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": true,
+        "created_at": "2026-05-24T20:03:30.868Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 22,
+    "fields": {
+        "user": 22,
+        "session": 16,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "cancelled",
+        "used_credits": false,
+        "created_at": "2026-05-24T20:03:30.876Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 23,
+    "fields": {
+        "user": 20,
+        "session": 19,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": false,
+        "created_at": "2026-05-24T20:03:30.887Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 24,
+    "fields": {
+        "user": 21,
+        "session": 16,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": true,
+        "created_at": "2026-05-24T20:03:30.893Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 25,
+    "fields": {
+        "user": 23,
+        "session": 13,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": false,
+        "created_at": "2026-05-25T10:53:53.037Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 26,
+    "fields": {
+        "user": 25,
+        "session": 13,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "cancelled",
+        "used_credits": true,
+        "created_at": "2026-05-28T10:53:59.739Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 27,
+    "fields": {
+        "user": 22,
+        "session": 16,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": false,
+        "created_at": "2026-06-02T10:34:08.774Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 28,
+    "fields": {
+        "user": 20,
+        "session": 16,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "cancelled",
+        "used_credits": true,
+        "created_at": "2026-06-04T10:46:08.543Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 29,
+    "fields": {
+        "user": 20,
+        "session": 16,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "cancelled",
+        "used_credits": true,
+        "created_at": "2026-06-04T10:58:14.212Z"
+    }
+},
+{
+    "model": "bookings.booking",
+    "pk": 30,
+    "fields": {
+        "user": 22,
+        "session": 20,
+        "seats": 1,
+        "note_to_trainer": "",
+        "status": "confirmed",
+        "used_credits": false,
+        "created_at": "2026-06-04T11:18:06.713Z"
+    }
+},
+{
+    "model": "bookings.review",
+    "pk": 4,
+    "fields": {
+        "booking": 20,
+        "trainer": 5,
+        "user": 20,
+        "rating": 5,
+        "comment": "it was realy so much fun",
+        "created_at": "2026-06-01T22:34:15.587Z"
+    }
+},
+{
+    "model": "bookings.membershipplan",
+    "pk": 4,
+    "fields": {
+        "name": "Plus",
+        "monthly_price": "399.00",
+        "monthly_credits": 8
+    }
+},
+{
+    "model": "bookings.membershipplan",
+    "pk": 5,
+    "fields": {
+        "name": "Basic",
+        "monthly_price": "199.00",
+        "monthly_credits": 4
+    }
+},
+{
+    "model": "bookings.membership",
+    "pk": 6,
+    "fields": {
+        "user": 20,
+        "plan": 4,
+        "start_date": "2026-05-01",
+        "end_date": "2026-06-01",
+        "remaining_credits": 6,
+        "is_active": true
+    }
+},
+{
+    "model": "bookings.membership",
+    "pk": 8,
+    "fields": {
+        "user": 25,
+        "plan": 4,
+        "start_date": "2026-05-28",
+        "end_date": "2026-06-27",
+        "remaining_credits": 8,
+        "is_active": true
+    }
+}
+]
